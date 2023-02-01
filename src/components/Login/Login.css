@@ -1,8 +1,8 @@
-.login,
-.image {
+.ms-login .login,
+.ms-login .image {
   min-height: 100vh;
 }
-.bg-image {
+.ms-login .bg-image {
   background-image: url("https://therichpost.com/wp-content/uploads/2021/02/login-split.jpg");
   background-size: cover;
   background-position: center center;

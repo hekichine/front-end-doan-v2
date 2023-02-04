@@ -1,7 +1,17 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import Header from "../Header/Header";
+import Slider from "./Slider";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <Header />
+      <section className="ms-app-content">
+        <Outlet />
+      </section>
+    </>
+  );
 };
 
 export default HomePage;

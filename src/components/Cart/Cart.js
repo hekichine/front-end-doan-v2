@@ -6,7 +6,10 @@ const Cart = () => {
   return (
     <>
       <div className="ms-cart">
-        <section className="section-content padding-y">
+        <section className="section-content">
+          <div className="ms-section-heading text-center py-5">
+            <h3>Shopping Cart</h3>
+          </div>
           <div className="container">
             <div className="row">
               <main className="col-lg-9 col-12">

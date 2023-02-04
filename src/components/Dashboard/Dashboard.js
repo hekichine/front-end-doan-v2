@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import "./Dashboard.css";
+import Social from "../Header/Social";
 
 const Dashboard = () => {
   const [toggleNav, setToggleNav] = useState(false);
@@ -31,63 +32,8 @@ const Dashboard = () => {
           >
             <i className="fas fa-bars"></i>
           </button>
-          {/* <!-- Navbar Search--> */}
-          <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div className="input-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Search for..."
-                aria-label="Search for..."
-                aria-describedby="btnNavbarSearch"
-              />
-              <button
-                className="btn btn-primary"
-                id="btnNavbarSearch"
-                type="button"
-              >
-                <i className="fas fa-search"></i>
-              </button>
-            </div>
-          </form>
+
           {/* <!-- Navbar--> */}
-          <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="fas fa-user fa-fw"></i>
-              </a>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdown"
-              >
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Activity Log
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Logout
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
         </nav>
         <div id="layoutSidenav">
           <div id="layoutSidenav_nav">
@@ -97,17 +43,25 @@ const Dashboard = () => {
             >
               <div className="sb-sidenav-menu">
                 <div className="nav">
-                  <div className="sb-sidenav-menu-heading">Core</div>
+                  <div className="sb-sidenav-menu-heading">
+                    <div className="ms-menu-avt">
+                      <img src="./assets/images/items/2.webp" alt="" />
+                    </div>
+                    <div className="ms-user-info">
+                      <p>Luu xuan chien</p>
+                      <span>admin</span>
+                    </div>
+                  </div>
                   <Link className="nav-link" to="/dashboard">
                     <div className="sb-nav-link-icon">
                       <i className="fas fa-tachometer-alt"></i>
                     </div>
                     Dashboard
                   </Link>
-                  <div className="sb-sidenav-menu-heading">Interface</div>
-                  <a
+                  <div className="sb-sidenav-menu-heading">Manager</div>
+                  <Link
                     className="nav-link collapsed"
-                    href="#"
+                    to=""
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseLayouts"
                     aria-expanded="false"
@@ -116,11 +70,11 @@ const Dashboard = () => {
                     <div className="sb-nav-link-icon">
                       <i className="fas fa-columns"></i>
                     </div>
-                    Layouts
+                    Products
                     <div className="sb-sidenav-collapse-arrow">
                       <i className="fas fa-angle-down"></i>
                     </div>
-                  </a>
+                  </Link>
                   <div
                     className="collapse"
                     id="collapseLayouts"
@@ -128,17 +82,17 @@ const Dashboard = () => {
                     data-bs-parent="#sidenavAccordion"
                   >
                     <nav className="sb-sidenav-menu-nested nav">
-                      <a className="nav-link" href="layout-static.html">
-                        Static Navigation
-                      </a>
-                      <a className="nav-link" href="layout-sidenav-light.html">
-                        Light Sidenav
-                      </a>
+                      <Link className="nav-link" to="/dashboard/products">
+                        Products
+                      </Link>
+                      <Link className="nav-link" to="/dashboard/categories">
+                        Categories
+                      </Link>
                     </nav>
                   </div>
-                  <a
+                  <Link
                     className="nav-link collapsed"
-                    href="#"
+                    to=""
                     data-bs-toggle="collapse"
                     data-bs-target="#collapsePages"
                     aria-expanded="false"
@@ -147,11 +101,11 @@ const Dashboard = () => {
                     <div className="sb-nav-link-icon">
                       <i className="fas fa-book-open"></i>
                     </div>
-                    Pages
+                    Account
                     <div className="sb-sidenav-collapse-arrow">
                       <i className="fas fa-angle-down"></i>
                     </div>
-                  </a>
+                  </Link>
                   <div
                     className="collapse"
                     id="collapsePages"
@@ -162,84 +116,25 @@ const Dashboard = () => {
                       className="sb-sidenav-menu-nested nav accordion"
                       id="sidenavAccordionPages"
                     >
-                      <a
+                      <Link
                         className="nav-link collapsed"
-                        href="#"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#pagesCollapseAuth"
-                        aria-expanded="false"
-                        aria-controls="pagesCollapseAuth"
+                        to="/dashboard/account"
                       >
                         Authentication
-                        <div className="sb-sidenav-collapse-arrow">
-                          <i className="fas fa-angle-down"></i>
-                        </div>
-                      </a>
-                      <div
-                        className="collapse"
-                        id="pagesCollapseAuth"
-                        aria-labelledby="headingOne"
-                        data-bs-parent="#sidenavAccordionPages"
-                      >
-                        <nav className="sb-sidenav-menu-nested nav">
-                          <a className="nav-link" href="login.html">
-                            Login
-                          </a>
-                          <a className="nav-link" href="register.html">
-                            Register
-                          </a>
-                          <a className="nav-link" href="password.html">
-                            Forgot Password
-                          </a>
-                        </nav>
-                      </div>
-                      <a
+                      </Link>
+
+                      <Link
                         className="nav-link collapsed"
-                        href="#"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#pagesCollapseError"
-                        aria-expanded="false"
-                        aria-controls="pagesCollapseError"
+                        to="/dashboard/logout"
                       >
-                        Error
-                        <div className="sb-sidenav-collapse-arrow">
-                          <i className="fas fa-angle-down"></i>
-                        </div>
-                      </a>
-                      <div
-                        className="collapse"
-                        id="pagesCollapseError"
-                        aria-labelledby="headingOne"
-                        data-bs-parent="#sidenavAccordionPages"
-                      >
-                        <nav className="sb-sidenav-menu-nested nav">
-                          <a className="nav-link" href="401.html">
-                            401 Page
-                          </a>
-                          <a className="nav-link" href="404.html">
-                            404 Page
-                          </a>
-                          <a className="nav-link" href="500.html">
-                            500 Page
-                          </a>
-                        </nav>
-                      </div>
+                        Logout
+                      </Link>
                     </nav>
                   </div>
-                  <div className="sb-sidenav-menu-heading">Addons</div>
-                  <a className="nav-link" href="charts.html">
-                    <div className="sb-nav-link-icon">
-                      <i className="fas fa-chart-area"></i>
-                    </div>
-                    Charts
-                  </a>
-                  <a className="nav-link" href="tables.html">
-                    <div className="sb-nav-link-icon">
-                      <i className="fas fa-table"></i>
-                    </div>
-                    Tables
-                  </a>
                 </div>
+              </div>
+              <div className="ms-social ">
+                <Social color={"#fff"} />
               </div>
               <div className="sb-sidenav-footer">
                 <div className="small">Logged in as:</div>

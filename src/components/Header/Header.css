@@ -1,0 +1,192 @@
+.ms-header {
+  -webkit-box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+  box-shadow: 0px 5px 20px -17px rgba(0, 0, 0, 0.34);
+}
+
+.ms-header .ms-cart-control {
+  position: relative;
+}
+.ms-header .ms-cart-control span {
+  position: absolute;
+  top: 0;
+  right: -7px;
+  background-color: #000;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  border-radius: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.ms-header .ms-cart-control svg {
+  margin-right: 15px;
+}
+.ms-header .ftco-section {
+  padding: 40px 0;
+}
+.ms-header .ftco-no-pt {
+  padding-top: 0;
+}
+.ms-header .ftco-no-pb {
+  padding-bottom: 0;
+}
+.ms-header .heading-section {
+  font-size: 28px;
+  color: #000;
+}
+.ms-header .img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.ms-header .ftco-navbar-light {
+  background: #fff !important;
+  z-index: 3;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+@media (max-width: 991.98px) {
+  .ftco-navbar-light {
+    background: #000 !important;
+    position: relative;
+    top: 0;
+    padding: 10px 15px;
+  }
+}
+.ms-header-top .navbar-brand {
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.ms-header-top .navbar-brand:hover,
+.ms-header-top .navbar-brand:focus {
+  color: #000;
+}
+.ftco-navbar-light .navbar-brand {
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+  .ftco-navbar-light .navbar-nav {
+    padding-bottom: 10px;
+  }
+}
+.ms-header .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+  font-size: 14px;
+  padding: 15px 20px;
+  font-weight: 400;
+  color: #333333;
+  position: relative;
+  opacity: 1 !important;
+}
+.ms-header .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
+  color: #fc7fb2;
+}
+@media (max-width: 991.98px) {
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .ms-header .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
+    color: #fff;
+  }
+}
+.ms-header .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
+  border: none;
+  background: #fff;
+  -webkit-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+  box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+  border-radius: 4px;
+  padding: 0;
+}
+.ms-header
+  .ftco-navbar-light
+  .navbar-nav
+  > .nav-item
+  .dropdown-menu
+  .dropdown-item {
+  font-size: 12px;
+  color: #000;
+}
+.ms-header
+  .ftco-navbar-light
+  .navbar-nav
+  > .nav-item
+  .dropdown-menu
+  .dropdown-item:hover,
+.ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu .dropdown-item:focus {
+  background: #fc7fb2;
+  color: #fff;
+}
+.ms-header .ftco-navbar-light .navbar-nav > .nav-item.cta > a {
+  color: #fff;
+  background: #fc7fb2;
+  border-radius: 0px;
+}
+@media (max-width: 767.98px) {
+  .ftco-navbar-light .navbar-nav > .nav-item.cta > a {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (max-width: 991.98px) {
+  .ftco-navbar-light .navbar-nav > .nav-item.cta > a {
+    color: #fff;
+    background: #fc7fb2;
+    border-radius: 4px;
+  }
+}
+.ms-header .ftco-navbar-light .navbar-nav .nav-link.active {
+  color: #fc7fb2;
+}
+@media (max-width: 991.98px) {
+  .ftco-navbar-light .navbar-nav > .nav-item.active > a {
+    color: #fff;
+  }
+}
+.ms-header .ftco-navbar-light .navbar-toggler {
+  border: none;
+  color: #000;
+  cursor: pointer;
+  padding-right: 0;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+}
+.ms-header .ftco-navbar-light .navbar-toggler:focus {
+  outline: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .ms-header .ftco-navbar-light .navbar-toggler {
+    order: -1;
+  }
+}
+@media screen and (min-width: 992px) {
+  .ms-header .navbar-nav {
+    margin-left: auto;
+  }
+  .ms-header .container {
+    max-width: 1740px;
+  }
+  .ms-header .ms-cart-control {
+    order: 6;
+  }
+}
+@media screen and (max-width: 424px) {
+  .ftco-navbar-light .navbar-brand {
+    order: -1;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+}

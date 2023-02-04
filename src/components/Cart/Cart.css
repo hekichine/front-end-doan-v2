@@ -35,13 +35,14 @@ a:hover {
   flex: 1 1 auto;
   padding: 2rem 2.3rem;
 }
-.ms-cart
-
+.ms-cart .ms-section-heading {
+  background-color: #b5d5fa;
+}
 /* =================  DEFINED VARIABLES =================== */
-.icon-xs,
-.icon-sm,
-.icon-md,
-.icon-lg {
+.ms-cart .icon-xs,
+.ms-cart .icon-sm,
+.ms-cart .icon-md,
+.ms-cart .icon-lg {
   display: inline-block;
   text-align: center;
   flex-shrink: 0;

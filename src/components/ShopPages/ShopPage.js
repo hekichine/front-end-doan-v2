@@ -7,13 +7,6 @@ import "./ShopPage.css";
 import data from "../ProductList/dataProduct";
 
 const ShopPage = () => {
-  const [grid, setGrid] = useState("col-xl-3");
-  const handleGrid1 = () => {
-    setGrid("col-xl-12 product-2");
-  };
-  const handleGrid2 = () => {
-    setGrid("col-xl-3");
-  };
   return (
     <>
       <div className="ms-shoppage">
@@ -288,33 +281,13 @@ const ShopPage = () => {
                         <option value="2">High rated</option>
                         <option value="3">Randomly</option>
                       </select>
-                      <div className="btn-group">
-                        <button
-                          className="btn btn-light"
-                          data-bs-toggle="tooltip"
-                          title="List view"
-                          onClick={() => handleGrid1()}
-                        >
-                          <i className="fa fa-bars"></i>
-                        </button>
-                        <button
-                          className="btn btn-light"
-                          data-bs-toggle="tooltip"
-                          title="Grid view"
-                          onClick={() => handleGrid2()}
-                        >
-                          <i className="fa fa-th"></i>
-                        </button>
-                      </div>
                     </div>
                   </header>
 
                   <div className="row gx-4 gy-3">
                     {data &&
                       data.length > 0 &&
-                      data.map((item, index) => (
-                        <Product data={item} col={grid} />
-                      ))}
+                      data.map((item, index) => <Product data={item} />)}
                   </div>
 
                   <hr />

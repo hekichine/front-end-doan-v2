@@ -5,13 +5,12 @@ import { FiShoppingBag } from "react-icons/fi";
 import "./Product.css";
 
 const Product = (props) => {
-  let grid = props.col;
   let data = props.data;
 
   return (
     <>
       <div
-        className={` col-6 col-md-6 col-lg-4 ${grid} ms-product-item `}
+        className={` col-6 col-md-6 col-lg-4 col-xl-3 ms-product-item `}
         key={data.id}
       >
         <div className="ms-product-inner">

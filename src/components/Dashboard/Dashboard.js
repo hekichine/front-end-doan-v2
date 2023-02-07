@@ -101,7 +101,7 @@ const Dashboard = () => {
                     <div className="sb-nav-link-icon">
                       <i className="fas fa-book-open"></i>
                     </div>
-                    Account
+                    User
                     <div className="sb-sidenav-collapse-arrow">
                       <i className="fas fa-angle-down"></i>
                     </div>
@@ -120,15 +120,15 @@ const Dashboard = () => {
                         className="nav-link collapsed"
                         to="/dashboard/account"
                       >
-                        Authentication
+                        Account
                       </Link>
 
-                      <Link
+                      {/* <Link
                         className="nav-link collapsed"
                         to="/dashboard/logout"
                       >
                         Logout
-                      </Link>
+                      </Link> */}
                     </nav>
                   </div>
                 </div>

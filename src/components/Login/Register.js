@@ -1,12 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 import loginImage from "./1.webp";
 const Login = () => {
-  const handleSubmit = (e) => {
+  const [username, setUsername] = useState("");
+  const [errname, setErrname] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [password, setPassword] = useState("");
+  const [errpass, setErrpass] = useState("");
+  const navigation = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (username.length <= 5) {
+      setErrname("Account must be 6 character");
+      return;
+    }
+    if (password.length <= 5) {
+      setErrpass("Password must be 6 character");
+      return;
+    }
+    if (username && email && password) {
+      let user = {
+        username: username,
+        email: email,
+        password: password,
+      };
+      let data = await axios.post(
+        "http://localhost:8080/api/user/register",
+        user
+      );
+      if (data.data.error === 0) {
+        toast(`🦄 Wow so easy! ${data.data.message}`, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+        setTimeout(() => {
+          navigation("/signin");
+          console.log(1);
+        }, 2000);
+      }
+    }
   };
+  useEffect(() => {
+    return clearTimeout();
+  }, []);
+
   return (
     <>
       <section className="ms-login">
@@ -33,9 +83,19 @@ const Login = () => {
                               type="text"
                               placeholder="User name"
                               required=""
-                              autofocus=""
+                              autoFocus=""
                               className="form-control rounded-pill border-0 shadow-sm px-4"
+                              onChange={(e) => {
+                                setUsername(e.target.value);
+                                setErrname("");
+                              }}
                             />
+                            <p
+                              className="text-start my-2 mx-2"
+                              style={{ color: "red" }}
+                            >
+                              {errname}
+                            </p>
                           </div>
                           <div className="mb-3">
                             <input
@@ -43,19 +103,12 @@ const Login = () => {
                               type="email"
                               placeholder="Email address"
                               required=""
-                              autofocus=""
+                              autoFocus=""
                               className="form-control rounded-pill border-0 shadow-sm px-4"
+                              onChange={(e) => setEmail(e.target.value)}
                             />
                           </div>
-                          <div className="mb-3">
-                            <input
-                              id="inputFullName"
-                              type="text"
-                              placeholder="Full name"
-                              required=""
-                              className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
-                            />
-                          </div>
+
                           <div className="mb-3">
                             <input
                               id="inputPassword"
@@ -63,7 +116,17 @@ const Login = () => {
                               placeholder="Password"
                               required=""
                               className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                              onChange={(e) => {
+                                setPassword(e.target.value);
+                                setErrpass("");
+                              }}
                             />
+                            <p
+                              className="text-start my-2 mx-2"
+                              style={{ color: "red" }}
+                            >
+                              {errpass}
+                            </p>
                           </div>
 
                           <div className="d-grid gap-2 mt-2">

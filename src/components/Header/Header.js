@@ -4,6 +4,8 @@ import { FiShoppingCart } from "react-icons/fi";
 
 import "./Header.css";
 const Header = () => {
+  let user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
   return (
     <>
       <section className="ms-header ftco-section">
@@ -34,7 +36,7 @@ const Header = () => {
                 <span className="fa fa-bars"></span> Menu
               </button>
               <div className="navbar-collapse collapse" id="ftco-nav">
-                <ul className="navbar-nav ml-auto mr-md-3">
+                <ul className="navbar-nav ml-auto mr-md-3 align-items-center">
                   <li className="nav-item">
                     <NavLink to="/" className="nav-link">
                       Home
@@ -51,15 +53,28 @@ const Header = () => {
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink to="/blog" className="nav-link">
-                      Blog
-                    </NavLink>
+                    <span className="nav-link">/</span>
                   </li>
-                  <li className="nav-item">
-                    <NavLink to="/contact" className="nav-link">
-                      Contact
-                    </NavLink>
-                  </li>
+                  {user ? (
+                    <>
+                      <li>
+                        <span className="mx-3">Hi! {user.fullname}</span>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="nav-item">
+                        <NavLink to="/signin" className="nav-link">
+                          Sign in
+                        </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink to="/signup" className="nav-link">
+                          Sign up
+                        </NavLink>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>

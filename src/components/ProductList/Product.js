@@ -15,7 +15,7 @@ const Product = (props) => {
       >
         <div className="ms-product-inner">
           <div className="ms-product-image ratio-3x4 ratio ms-pr">
-            <Link to="">
+            <Link to={`/product/${data.id}`}>
               <img className="" src={data.image_url} alt="" />
             </Link>
             <div className="ms-hover-icon ms-pa">

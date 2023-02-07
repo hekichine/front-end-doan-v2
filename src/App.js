@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+
 import ShopPage from "./components/ShopPages/ShopPage";
 import Login from "./components/Login/Login";
 import Cart from "./components/Cart/Cart";
@@ -10,6 +11,8 @@ import PageContent from "./components/HomePage/PageContent";
 import NotFound from "./components/404NotFound/NotFound";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Register from "./components/Login/Register";
+import AccountManager from "./components/Dashboard/AccountManager";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -23,13 +26,26 @@ function App() {
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Admin />} />
+          <Route path="account" element={<AccountManager />} />
         </Route>
-
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 }

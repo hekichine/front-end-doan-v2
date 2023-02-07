@@ -1,12 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import "./Login.css";
 import loginImage from "./1.webp";
+
 const Login = () => {
-  const handleSubmit = (e) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigation = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (username && password) {
+      let user = {
+        username: username,
+        password: password,
+      };
+      let data = await axios.post("http://localhost:8080/api/user/login", user);
+      if (data.data.error === 1) {
+        toast.error(`${data.data.message}`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        return;
+      }
+      toast.success(`${data.data.message}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      localStorage.setItem("user", JSON.stringify(data.data.user_info[0]));
+      setTimeout(() => {
+        if (data.data.user_info[0].role === 1) {
+          navigation("/dashboard");
+        } else {
+          navigation("/");
+        }
+      }, 3000);
+    }
   };
+
+  useEffect(() => {
+    return clearTimeout();
+  }, []);
   return (
     <>
       <section className="ms-login">
@@ -33,8 +83,9 @@ const Login = () => {
                               type="text"
                               placeholder="User name"
                               required=""
-                              autofocus=""
+                              autoFocus=""
                               className="form-control rounded-pill border-0 shadow-sm px-4"
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </div>
                           <div className="mb-3">
@@ -44,6 +95,7 @@ const Login = () => {
                               placeholder="Password"
                               required=""
                               className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                           </div>
                           <div className="form-check text-end">

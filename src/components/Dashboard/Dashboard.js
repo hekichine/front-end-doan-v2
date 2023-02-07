@@ -137,8 +137,7 @@ const Dashboard = () => {
                 <Social color={"#fff"} />
               </div>
               <div className="sb-sidenav-footer">
-                <div className="small">Logged in as:</div>
-                Start Bootstrap
+                <div className="small">Power by: HekiChien</div>
               </div>
             </nav>
           </div>

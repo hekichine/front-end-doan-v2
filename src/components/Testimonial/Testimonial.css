@@ -1,0 +1,27 @@
+.ms-testimonial {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ms-testimonial .ms-testi-inner {
+  height: 510px;
+}
+.ms-testi-inner .ms-testi-content {
+  font-size: 14px;
+  color: #707070;
+  line-height: 30px;
+  font-weight: 400;
+  max-width: 50%;
+  margin: 0 auto;
+}
+.ms-testi-inner .ms-testi-author {
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: 6px;
+  color: #292929;
+}
+
+@media screen and (max-width: 1440px) {
+  .ms-testi-inner .ms-testi-content {
+    min-width: 100%;
+  }
+}

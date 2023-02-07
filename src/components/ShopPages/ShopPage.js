@@ -1,64 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Product from "../ProductList/Product";
 
 import "./ShopPage.css";
-import ShopPageItem from "./ShopPageItem";
 
-let data = [
-  {
-    id: 1,
-    title: "Winter Jacket for Men and Women, All sizes",
-    price: 120.0,
-    img_url: "./assets/images/items/7.webp",
-  },
-  {
-    id: 2,
-    title: "T-shirts with multiple colors, for men and lady",
-    price: 120.0,
-    img_url: "./assets/images/items/8.webp",
-  },
-  {
-    id: 3,
-    title: "T-shirts with multiple colors, for men and lady",
-    price: 120.0,
-    img_url: "./assets/images/items/9.webp",
-  },
-  {
-    id: 4,
-    title: "Blazer Suit Dress Jacket for Men, Blue color",
-    price: 520.0,
-    img_url: "./assets/images/items/10.webp",
-  },
-  {
-    id: 5,
-    title: "Rucksack Backpack The Bridge Large Line Mounts",
-    price: 79.99,
-    img_url: "./assets/images/items/11.webp",
-  },
-  {
-    id: 6,
-    title: "T-shirts with multiple colors, for men and lady",
-    price: 120.0,
-    img_url: "./assets/images/items/12.webp",
-  },
-  {
-    id: 7,
-    title: "T-shirts with multiple colors, for men and lady",
-    price: 120.0,
-    img_url: "./assets/images/items/6.webp",
-  },
-];
+import data from "../ProductList/dataProduct";
+
 const ShopPage = () => {
+  const [grid, setGrid] = useState("col-xl-3");
+  const handleGrid1 = () => {
+    setGrid("col-xl-12 product-2");
+  };
+  const handleGrid2 = () => {
+    setGrid("col-xl-3");
+  };
   return (
     <>
       <div className="ms-shoppage">
         <div className="home-section">
-          <section className="bg-primary py-5">
+          <section className="bg-light py-5">
             <div className="container">
-              <h2 className="text-white">Search: Men</h2>
+              <h2 className="text-black">Category: Book</h2>
               <ol className="breadcrumb ondark mb-0">
                 <li className="breadcrumb-item">
-                  <Link to={"/homepage"}>Home</Link>
+                  <Link to={"/"}>Home</Link>
                 </li>
 
                 <li className="breadcrumb-item active" aria-current="page">
@@ -324,28 +289,32 @@ const ShopPage = () => {
                         <option value="3">Randomly</option>
                       </select>
                       <div className="btn-group">
-                        <Link
-                          to={""}
+                        <button
                           className="btn btn-light"
                           data-bs-toggle="tooltip"
                           title="List view"
+                          onClick={() => handleGrid1()}
                         >
                           <i className="fa fa-bars"></i>
-                        </Link>
-                        <Link
-                          to={""}
+                        </button>
+                        <button
                           className="btn btn-light"
                           data-bs-toggle="tooltip"
                           title="Grid view"
+                          onClick={() => handleGrid2()}
                         >
                           <i className="fa fa-th"></i>
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </header>
 
-                  <div className="row">
-                    <ShopPageItem data={data} />
+                  <div className="row gx-4 gy-3">
+                    {data &&
+                      data.length > 0 &&
+                      data.map((item, index) => (
+                        <Product data={item} col={grid} />
+                      ))}
                   </div>
 
                   <hr />

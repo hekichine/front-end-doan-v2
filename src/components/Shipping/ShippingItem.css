@@ -1,0 +1,19 @@
+.shipping-inner svg {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 30px;
+  stroke-width: 1;
+}
+.shipping-inner p {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  margin-bottom: 24px;
+  color: #292929;
+}
+.shipping-inner span {
+  font-weight: 400;
+  line-height: 19px;
+  color: #929292;
+  font-size: 14px;
+}

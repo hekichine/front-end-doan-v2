@@ -33,7 +33,7 @@ const UserTable = (props) => {
                   <td>{item.email}</td>
                   <td>
                     <Link
-                      to="#"
+                      to=""
                       className="edit"
                       title=""
                       data-toggle="tooltip"
@@ -42,7 +42,7 @@ const UserTable = (props) => {
                       <i className="fa-solid fa-pen-to-square"></i>
                     </Link>
                     <Link
-                      to="#"
+                      to=""
                       className="delete"
                       title=""
                       data-toggle="tooltip"

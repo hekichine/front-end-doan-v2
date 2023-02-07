@@ -39,6 +39,25 @@ const Login = () => {
                           </div>
                           <div className="mb-3">
                             <input
+                              id="inputEmail"
+                              type="email"
+                              placeholder="Email address"
+                              required=""
+                              autofocus=""
+                              className="form-control rounded-pill border-0 shadow-sm px-4"
+                            />
+                          </div>
+                          <div className="mb-3">
+                            <input
+                              id="inputFullName"
+                              type="text"
+                              placeholder="Full name"
+                              required=""
+                              className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                            />
+                          </div>
+                          <div className="mb-3">
+                            <input
                               id="inputPassword"
                               type="password"
                               placeholder="Password"
@@ -46,41 +65,23 @@ const Login = () => {
                               className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
                             />
                           </div>
-                          <div className="form-check text-end">
-                            Dont's have a account?
-                            <Link
-                              to="/signup"
-                              type="submit"
-                              className=" text-uppercase ms-2 mb-2 me-2 rounded-pill shadow-sm  d-inline-block"
-                            >
-                              Register
-                            </Link>
-                          </div>
+
                           <div className="d-grid gap-2 mt-2">
                             <button
                               type="submit"
                               className="btn btn-primary btn-block text-uppercase mb-2  rounded-pill shadow-sm"
                             >
-                              Sign in
+                              Sign up
                             </button>
 
                             <Link
-                              to="/"
+                              to="/signin"
                               type="submit"
                               className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
                             >
-                              Back to home page
+                              Back to Sign in
                             </Link>
                           </div>
-
-                          {/* <div className="text-center d-flex justify-content-between mt-4">
-                          <p>
-                            Code by{" "}
-                            <a href="#" className="font-italic text-muted">
-                              <u>Chien luu xuan</u>
-                            </a>
-                          </p>
-                        </div> */}
                         </form>
                       </div>
                     </div>

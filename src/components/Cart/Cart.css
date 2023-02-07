@@ -564,8 +564,9 @@ article:after,
   color: #969696;
 }
 .ms-cart .btn-light:hover {
-  background-color: #fff;
-  border-color: #989898;
+  background-color: #f69491;
+  border-color: #f69491;
+  color: #fff;
 }
 .ms-cart .btn .text + i {
   margin-left: 10px;

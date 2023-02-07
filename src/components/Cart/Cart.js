@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./Cart.css";
+import CartItem from "./CartItem";
+import data from "../ProductList/dataProduct.js";
+
 const Cart = () => {
   return (
     <>
@@ -30,159 +33,9 @@ const Cart = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <figure className="itemside">
-                            <div className="aside">
-                              <img
-                                src="./assets/images/items/1.webp"
-                                className="img-sm"
-                              />
-                            </div>
-                            <figcaption className="info">
-                              <Link to="#" className="title text-dark">
-                                Some name of item goes here nice
-                              </Link>
-                              <p className="text-muted small">
-                                Size: XL, Color: blue, Brand: Gucci
-                              </p>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            className="form-control"
-                            value={1}
-                          />
-                        </td>
-                        <td>
-                          <div className="price-wrap">
-                            <var className="price">$1156.00</var>
-                            <small className="text-muted"> $315.20 each </small>
-                          </div>
-                        </td>
-                        <td className="text-right">
-                          <button
-                            data-original-title="Save to Wishlist"
-                            title="Add to wishlist"
-                            className="btn btn-light mr-2"
-                            data-toggle="tooltip"
-                          >
-                            {" "}
-                            <i className="fa fa-heart"></i>
-                          </button>
-                          <button
-                            className="btn btn-light"
-                            title="Remove product"
-                          >
-                            {" "}
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <figure className="itemside">
-                            <div className="aside">
-                              <img
-                                src="./assets/images/items/2.webp"
-                                className="img-sm"
-                              />
-                            </div>
-                            <figcaption className="info">
-                              <Link to="#" className="title text-dark">
-                                Product name goes here nice
-                              </Link>
-                              <p className="text-muted small">
-                                Size: XL, Color: blue, Brand: Gucci
-                              </p>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            className="form-control"
-                            value={1}
-                          />
-                        </td>
-                        <td>
-                          <div className="price-wrap">
-                            <var className="price">$149.97</var>
-                            <small className="text-muted"> $75.00 each </small>
-                          </div>
-                        </td>
-                        <td className="text-right">
-                          <button
-                            data-original-title="Save to Wishlist"
-                            title="Add to wishlist"
-                            className="btn btn-light mr-2"
-                            data-toggle="tooltip"
-                          >
-                            {" "}
-                            <i className="fa fa-heart"></i>
-                          </button>
-                          <button
-                            className="btn btn-light"
-                            title="Remove product"
-                          >
-                            {" "}
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <figure className="itemside">
-                            <div className="aside">
-                              <img
-                                src="./assets/images/items/3.webp"
-                                className="img-sm"
-                              />
-                            </div>
-                            <figcaption className="info">
-                              <Link to="#" className="title text-dark">
-                                Another name of some product goes just here
-                              </Link>
-                              <p className="small text-muted">
-                                Size: XL, Color: blue, Brand: Tissot
-                              </p>
-                            </figcaption>
-                          </figure>
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            className="form-control"
-                            value={1}
-                          />
-                        </td>
-                        <td>
-                          <div className="price-wrap">
-                            <var className="price">$98.00</var>
-                            <small className="text-muted"> $578.00 each</small>
-                          </div>
-                        </td>
-                        <td className="text-right">
-                          <button
-                            data-original-title="Save to Wishlist"
-                            title="Add to wishlist"
-                            className="btn btn-light mr-2"
-                            data-toggle="tooltip"
-                          >
-                            {" "}
-                            <i className="fa fa-heart"></i>
-                          </button>
-                          <button
-                            className="btn btn-light"
-                            title="Remove product"
-                          >
-                            {" "}
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
+                      {data.slice(0, 4).map((item, index) => (
+                        <CartItem data={item} />
+                      ))}
                     </tbody>
                   </table>
 

@@ -3,6 +3,7 @@ import Chart from "./Chart";
 import CountUser from "./CountUser";
 import "./Dashboard.css";
 import UserTable from "./UserTable";
+import { Link } from "react-router-dom";
 
 let dataUser = [
   {
@@ -143,11 +144,16 @@ const Admin = () => {
       <footer className="py-4 bg-light mt-auto">
         <div className="container-fluid px-4">
           <div className="d-flex align-items-center justify-content-between small">
-            <div className="text-muted">Copyright &copy; Your Website 2022</div>
+            <div className="text-muted">
+              Copyright &copy; MINHSANGSTORE 2022 by
+              <Link className="ms-1" to="">
+                HekiChien
+              </Link>
+            </div>
             <div>
-              <a href="#">Privacy Policy</a>
+              <Link to="">Privacy Policy</Link>
               &middot;
-              <a href="#">Terms &amp; Conditions</a>
+              <Link to="">Terms &amp; Conditions</Link>
             </div>
           </div>
         </div>

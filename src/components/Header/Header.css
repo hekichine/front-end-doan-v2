@@ -175,9 +175,11 @@
   .ms-header .navbar-nav {
     margin-left: auto;
   }
-  .ms-header .container {
+  .ms-header .container,
+  .ms-footer .container {
     max-width: 1740px;
   }
+
   .ms-header .ms-cart-control {
     order: 6;
   }

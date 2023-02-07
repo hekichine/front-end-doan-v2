@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import Slider from "./Slider";
 
 const HomePage = () => {
   return (
@@ -10,6 +10,7 @@ const HomePage = () => {
       <section className="ms-app-content">
         <Outlet />
       </section>
+      <Footer />
     </>
   );
 };

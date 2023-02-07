@@ -8,6 +8,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Admin from "./components/Dashboard/Admin";
 import PageContent from "./components/HomePage/PageContent";
 import NotFound from "./components/404NotFound/NotFound";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
+import Register from "./components/Login/Register";
 
 function App() {
   return (
@@ -17,12 +19,14 @@ function App() {
           <Route path="" element={<PageContent />} />
           <Route path="cart" element={<Cart />} />
           <Route path="shop" element={<ShopPage />} />
+          <Route path="product/:id" element={<ProductDetail />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Admin />} />
         </Route>
 
-        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

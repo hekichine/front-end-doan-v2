@@ -5,7 +5,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import "./Header.css";
 const Header = () => {
   let user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+
   return (
     <>
       <section className="ms-header ftco-section">

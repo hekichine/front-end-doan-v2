@@ -15,7 +15,7 @@ const ShopPagedata = (props) => {
               <strong className="price">${data?.old}</strong>
               <del className="price-old">${data.price}</del>
             </div>
-            <Link to={""} className="title mb-2">
+            <Link to={`/product/${data.id}`} className="title mb-2">
               {data.title}
             </Link>
             <button className="btn btn-primary">Add to cart</button>

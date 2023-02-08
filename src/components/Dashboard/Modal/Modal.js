@@ -40,22 +40,31 @@ const Modal = (props) => {
         });
         return;
       }
-
-      let userUpdate = {
-        id: user?.id,
-        username: user.username,
-        user_avt: avt,
-        password: password,
-        fullname: fullname,
-        email: email,
-        address: address,
-        phone: phone,
-        role: role,
-      };
-
+      let formData = new FormData();
+      formData.append("id", user.id);
+      formData.append("username", user.username);
+      formData.append("user_avt", user.user_avt);
+      formData.append("password", user.password);
+      formData.append("fullname", user.fullname);
+      formData.append("email", user.email);
+      formData.append("address", user.address);
+      formData.append("phone", user.phone);
+      formData.append("role", user.role);
+      // let userUpdate = {
+      //   id: user?.id,
+      //   username: user.username,
+      //   user_avt: avt,
+      //   password: password,
+      //   fullname: fullname,
+      //   email: email,
+      //   address: address,
+      //   phone: phone,
+      //   role: role,
+      // };
+      console.log(formData);
       let data = await axios.post(
         "http://localhost:8080/api/user/update",
-        userUpdate
+        formData
       );
 
       if (data.data.error === 0) {
@@ -72,6 +81,18 @@ const Modal = (props) => {
         setActive(false);
         return;
       }
+      toast.error(`${data.data.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      return;
     }
     toast.error("Email or password is valid", {
       position: "top-right",

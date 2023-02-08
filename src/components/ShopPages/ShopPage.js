@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "../ProductList/Product";
+import axios from "axios";
 
 import "./ShopPage.css";
 
-import data from "../ProductList/dataProduct";
+// import data from "../ProductList/dataProduct";
 
 const ShopPage = () => {
+  const [data, setData] = useState();
+  const getAll = async () => {
+    let data = await axios.get("http://localhost:8080/api/product/getall");
+    if (data.data.error === 0) {
+      setData(data.data.product_list);
+    }
+  };
+  useEffect(() => {
+    getAll();
+  }, []);
   return (
     <>
       <div className="ms-shoppage">

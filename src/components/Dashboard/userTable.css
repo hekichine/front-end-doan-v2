@@ -4,3 +4,8 @@ tr td .edit {
 .user-table {
   min-width: 950px;
 }
+.user-table tr button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}

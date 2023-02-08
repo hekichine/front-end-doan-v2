@@ -1,11 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+
+import Modal from "./Modal/Modal";
 
 import "./userTable.css";
 
 const UserTable = (props) => {
+  const [active, setActive] = useState(false);
+  const [user, setUser] = useState();
   let dataUser = props.dataUser;
   let search = props.search;
+  let setReUser = props.setReUser;
+
+  const handleDelete = async (item) => {
+    let data = await axios.delete(
+      `http://localhost:8080/api/user/delete/${item.id}`
+    );
+
+    if (data.data.error === 0) {
+      toast.success(`${data.data.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      let newUSer = dataUser.filter((user) => user.id !== item.id);
+      setReUser(newUSer);
+      return;
+    }
+    toast.error(`${data.data.message}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    return;
+  };
+
   return (
     <>
       <table className="user-table table table-striped table-hover table-bordered">
@@ -29,7 +69,8 @@ const UserTable = (props) => {
                   return user;
                 } else if (
                   user.fullname.toLowerCase().includes(search.toLowerCase()) ||
-                  user.username.toLowerCase().includes(search.toLowerCase())
+                  user.username.toLowerCase().includes(search.toLowerCase()) ||
+                  user.address.toLowerCase().includes(search.toLowerCase())
                 ) {
                   return user;
                 }
@@ -44,29 +85,39 @@ const UserTable = (props) => {
                     <td>{item.phone}</td>
                     <td>{item.email}</td>
                     <td>
-                      <Link
-                        to=""
-                        className="edit"
-                        title=""
-                        data-toggle="tooltip"
-                        data-original-title="Edit"
-                      >
-                        <i className="fa-solid fa-pen-to-square"></i>
-                      </Link>
-                      <Link
-                        to=""
-                        className="delete"
-                        title=""
-                        data-toggle="tooltip"
-                        data-original-title="Delete"
-                      >
-                        <i className="fa-regular fa-trash-can"></i>
-                      </Link>
+                      {item.role === 1 ? (
+                        <>
+                          <span>Admin</span>
+                        </>
+                      ) : (
+                        <>
+                          {" "}
+                          <button
+                            className="edit"
+                            title=""
+                            data-toggle="tooltip"
+                            data-original-title="Edit"
+                            onClick={() => (setActive(true), setUser(item))}
+                          >
+                            <i className="fa-solid fa-pen-to-square"></i>
+                          </button>
+                          <button
+                            className="delete"
+                            title=""
+                            data-toggle="tooltip"
+                            data-original-title="Delete"
+                            onClick={() => handleDelete(item)}
+                          >
+                            <i className="fa-regular fa-trash-can"></i>
+                          </button>
+                        </>
+                      )}
                     </td>
                   </tr>
                 </>
               ))}
         </tbody>
+        <Modal active={active} setActive={setActive} user={user} />
       </table>
     </>
   );

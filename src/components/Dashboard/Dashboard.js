@@ -6,6 +6,7 @@ import Social from "../Header/Social";
 
 const Dashboard = () => {
   const [toggleNav, setToggleNav] = useState(false);
+  let user = JSON.parse(localStorage.getItem("user"));
 
   const handleNav = () => {
     setToggleNav(!toggleNav);
@@ -45,11 +46,14 @@ const Dashboard = () => {
                 <div className="nav">
                   <div className="sb-sidenav-menu-heading">
                     <div className="ms-menu-avt">
-                      <img src="./assets/images/items/2.webp" alt="" />
+                      <img
+                        src={`http://localhost:8080/${user.user_avt}`}
+                        alt=""
+                      />
                     </div>
                     <div className="ms-user-info">
-                      <p>Luu xuan chien</p>
-                      <span>admin</span>
+                      <p>{user.fullname}</p>
+                      <span>Admin</span>
                     </div>
                   </div>
                   <Link className="nav-link" to="/dashboard">

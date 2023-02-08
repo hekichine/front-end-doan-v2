@@ -13,6 +13,7 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Register from "./components/Login/Register";
 import AccountManager from "./components/Dashboard/AccountManager";
 import { ToastContainer } from "react-toastify";
+import Logout from "./components/Logout/Logout";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         </Route>
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="/signout" element={<Logout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer

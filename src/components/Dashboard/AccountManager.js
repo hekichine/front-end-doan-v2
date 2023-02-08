@@ -15,7 +15,6 @@ const AccountManager = () => {
       return;
     }
   };
-
   useEffect(() => {
     callDataUser();
   }, []);
@@ -43,7 +42,11 @@ const AccountManager = () => {
               {loading ? (
                 <BeatLoader color="#36d7b7" />
               ) : (
-                <UserTable dataUser={user} search={search} />
+                <UserTable
+                  setReUser={setUser}
+                  dataUser={user}
+                  search={search}
+                />
               )}
             </div>
           </div>

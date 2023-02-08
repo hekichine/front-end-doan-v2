@@ -18,6 +18,9 @@
 .ms-pa {
   position: absolute;
 }
+.ms-pf {
+  position: fixed;
+}
 .ratio::before {
   background-color: #d2d2d3;
 }

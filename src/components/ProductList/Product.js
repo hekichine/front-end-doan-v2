@@ -6,6 +6,7 @@ import "./Product.css";
 
 const Product = (props) => {
   let data = props.data;
+  console.log(data);
 
   return (
     <>
@@ -18,7 +19,7 @@ const Product = (props) => {
             <Link to={`/product/${data.id}`}>
               <img
                 className=""
-                src={`http://localhost:8080/${data.image}`}
+                src={`http://localhost:8080/${data.product_image}`}
                 alt=""
               />
             </Link>
@@ -37,7 +38,7 @@ const Product = (props) => {
           </div>
           <div className="ms-product-content">
             <h3 className="ms-product-title">
-              <Link to={`/product/${data.id}`}>{data.name}</Link>
+              <Link to={`/product/${data.id}`}>{data.product_name}</Link>
             </h3>
             <p className="ms-product-price">
               {data.sale === 0 ? (

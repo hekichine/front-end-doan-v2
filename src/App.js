@@ -14,6 +14,7 @@ import Register from "./components/Login/Register";
 import AccountManager from "./components/Dashboard/AccountManager";
 import { ToastContainer } from "react-toastify";
 import Logout from "./components/Logout/Logout";
+import Modal from "./components/Dashboard/Modal/Modal";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />}>
           <Route path="" element={<PageContent />} />
+          <Route path="account" element={<AccountManager />} />
           <Route path="cart" element={<Cart />} />
           <Route path="shop" element={<ShopPage />} />
           <Route path="product/:id" element={<ProductDetail />} />
@@ -28,6 +30,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Admin />} />
           <Route path="account" element={<AccountManager />} />
+          <Route path="account/detail" element={<Modal />} />
         </Route>
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />

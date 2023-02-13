@@ -2,17 +2,22 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-import Modal from "./Modal/Modal";
+import { Link } from "react-router-dom";
+import { addUser } from "../../redux/userSlide";
 
 import "./userTable.css";
+import { useDispatch } from "react-redux";
 
 const UserTable = (props) => {
   const [active, setActive] = useState(false);
-  const [user, setUser] = useState();
+  const dispatch = useDispatch();
   let dataUser = props.dataUser;
   let search = props.search;
   let setReUser = props.setReUser;
 
+  const handleEdit = (item) => {
+    dispatch(addUser(item));
+  };
   const handleDelete = async (item) => {
     let data = await axios.delete(
       `http://localhost:8080/api/user/delete/${item.id}`
@@ -79,7 +84,13 @@ const UserTable = (props) => {
                 <>
                   <tr key={item}>
                     <td>{index}</td>
-                    <td>{item.fullname}</td>
+                    <td>
+                      {item.fullname}{" "}
+                      <img
+                        src={`http://localhost:8080/${item.user_avt}`}
+                        style={{ width: "150px", height: "150px" }}
+                      />
+                    </td>
                     <td>{item.username}</td>
                     <td>{item.address}</td>
                     <td>{item.phone}</td>
@@ -92,15 +103,16 @@ const UserTable = (props) => {
                       ) : (
                         <>
                           {" "}
-                          <button
+                          <Link
+                            to={"/dashboard/account/detail"}
                             className="edit"
                             title=""
                             data-toggle="tooltip"
                             data-original-title="Edit"
-                            onClick={() => (setActive(true), setUser(item))}
+                            onClick={() => handleEdit(item)}
                           >
                             <i className="fa-solid fa-pen-to-square"></i>
-                          </button>
+                          </Link>
                           <button
                             className="delete"
                             title=""
@@ -117,7 +129,6 @@ const UserTable = (props) => {
                 </>
               ))}
         </tbody>
-        <Modal active={active} setActive={setActive} user={user} />
       </table>
     </>
   );

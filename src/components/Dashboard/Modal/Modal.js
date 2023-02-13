@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 import "./Modal.css";
+import { useDispatch, useSelector } from "react-redux";
+
+import { removeUser } from "../../../redux/userSlide";
+import { useNavigate } from "react-router-dom";
 
 const Modal = (props) => {
-  let active = props.active;
-  let setActive = props.setActive;
-  let user = props.user;
+  const user = useSelector((state) => state.user.data);
+  console.log(user);
+  const dispatch = useDispatch();
+  const navigation = useNavigate();
 
-  const [avt, setAvt] = useState();
-  const [password, setPassword] = useState("");
-  const [fullname, setFullname] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [role, setRole] = useState(0);
+  const [id, setId] = useState(user?.id);
+  const [username, setUsername] = useState(user?.username);
+  const [avt, setAvt] = useState(user?.user_avt);
+  const [password, setPassword] = useState(user?.password);
+  const [fullname, setFullname] = useState(user?.fullname);
+  const [address, setAddress] = useState(user?.address);
+  const [email, setEmail] = useState(user?.email);
+  const [phone, setPhone] = useState(user?.phone);
+  const [role, setRole] = useState(user?.role);
 
   const handleCancel = () => {
-    setActive(false);
-    setPassword("");
-    setFullname("");
-    setAddress("");
-    setEmail("");
-    setPhone("");
+    dispatch(removeUser());
+    navigation("/dashboard/account");
   };
   const handleSubmit = async () => {
     if (email && password) {
@@ -41,15 +44,15 @@ const Modal = (props) => {
         return;
       }
       let formData = new FormData();
-      formData.append("id", user.id);
-      formData.append("username", user.username);
-      formData.append("user_avt", user.user_avt);
-      formData.append("password", user.password);
-      formData.append("fullname", user.fullname);
-      formData.append("email", user.email);
-      formData.append("address", user.address);
-      formData.append("phone", user.phone);
-      formData.append("role", user.role);
+      formData.append("id", id);
+      formData.append("username", username);
+      formData.append("user_avt", avt);
+      formData.append("password", password);
+      formData.append("fullname", fullname);
+      formData.append("email", email);
+      formData.append("address", address);
+      formData.append("phone", phone);
+      formData.append("role", role);
       // let userUpdate = {
       //   id: user?.id,
       //   username: user.username,
@@ -61,7 +64,8 @@ const Modal = (props) => {
       //   phone: phone,
       //   role: role,
       // };
-      console.log(formData);
+      // console.log(formData);
+      // return;
       let data = await axios.post(
         "http://localhost:8080/api/user/update",
         formData
@@ -78,7 +82,8 @@ const Modal = (props) => {
           progress: undefined,
           theme: "light",
         });
-        setActive(false);
+        navigation("/dashboard/account");
+
         return;
       }
       toast.error(`${data.data.message}`, {
@@ -108,7 +113,7 @@ const Modal = (props) => {
 
   return (
     <>
-      <div className={` ms-modal ms-pf ${active ? "active" : ""} `}>
+      <div className={`ms-modal ms-pf`}>
         <div className="container">
           <div className="ms-section-heading my-3">Update User</div>
           <div className="row gx-3 gy-3">
@@ -118,7 +123,7 @@ const Modal = (props) => {
                 type="text"
                 className="form-control my-1"
                 id="username"
-                value={user?.username}
+                value={username}
                 readOnly="true"
               />
             </div>
@@ -129,7 +134,7 @@ const Modal = (props) => {
                 className="form-control my-1"
                 id="fullname"
                 value={fullname}
-                placeholder={user?.fullname}
+                placeholder={fullname}
                 onChange={(e) => setFullname(e.target.value)}
               />
             </div>
@@ -140,7 +145,7 @@ const Modal = (props) => {
                 className="form-control my-1"
                 id="password"
                 value={password}
-                placeholder={user?.password}
+                placeholder={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -151,7 +156,7 @@ const Modal = (props) => {
                 className="form-control my-1"
                 id="address"
                 value={address}
-                placeholder={user?.address}
+                placeholder={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
@@ -163,7 +168,7 @@ const Modal = (props) => {
                 id="email"
                 required
                 value={email}
-                placeholder={user?.email}
+                placeholder={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -175,7 +180,7 @@ const Modal = (props) => {
                 id="phone"
                 value={phone}
                 required
-                placeholder={user?.phone}
+                placeholder={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
@@ -185,7 +190,7 @@ const Modal = (props) => {
                 type="file"
                 className="form-control my-1"
                 id="avt"
-                onChange={(e) => setAvt(e.target.files[0].name)}
+                onChange={(e) => setAvt(e.target.files[0])}
                 accept={"image/jpg image/jpeg image/png"}
               />
             </div>

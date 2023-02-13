@@ -4,20 +4,31 @@ import Product from "../ProductList/Product";
 import axios from "axios";
 
 import "./ShopPage.css";
+import ReactPaginate from "react-paginate";
 
 // import data from "../ProductList/dataProduct";
 
 const ShopPage = () => {
   const [data, setData] = useState();
-  const getAll = async () => {
-    let data = await axios.get("http://localhost:8080/api/product/getall");
-    if (data.data.error === 0) {
-      setData(data.data.product_list);
-    }
+  const [page, setPage] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const handlePageClick = (dt) => {
+    let numpage = dt.selected + 1;
+    setCurrentPage(numpage);
   };
+
   useEffect(() => {
-    getAll();
-  }, []);
+    const getAll = async (currentPage) => {
+      let result = await axios.get(
+        `http://localhost:8080/api/product/getall?page=${currentPage}&limit=8`
+      );
+      if (result.data.error === 0) {
+        setPage(result.data.pageCount);
+        setData(result.data.rows);
+      }
+    };
+    getAll(currentPage);
+  }, [currentPage]);
   return (
     <>
       <div className="ms-shoppage">
@@ -298,33 +309,31 @@ const ShopPage = () => {
                   <div className="row gx-4 gy-3">
                     {data &&
                       data.length > 0 &&
-                      data.map((item, index) => <Product data={item} />)}
+                      data?.map((item, index) => <Product data={item} />)}
                   </div>
 
                   <hr />
 
                   <footer className="d-flex mt-4">
                     <nav className="ms-3">
-                      <ul className="pagination">
-                        <li className="page-item">
-                          <Link className="page-link" to={""}>
-                            1
-                          </Link>
-                        </li>
-                        <li className="page-item active" aria-current="page">
-                          <span className="page-link">2</span>
-                        </li>
-                        <li className="page-item">
-                          <Link className="page-link" to={""}>
-                            3
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link className="page-link" to={""}>
-                            Next
-                          </Link>
-                        </li>
-                      </ul>
+                      <ReactPaginate
+                        previousLabel={"Previous"}
+                        nextLabel={"Next"}
+                        breakLabel={"..."}
+                        pageCount={page}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={1}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-item"}
+                        previousLinkClassName={"page-link"}
+                        nextClassName={"page-item"}
+                        nextLinkClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                      />
                     </nav>
                   </footer>
                 </main>

@@ -7,8 +7,6 @@
   justify-content: center;
   align-items: center;
   transition: 0.15s ease-in-out;
-  visibility: hidden;
-  opacity: 0;
 }
 @media screen and (min-width: 992px) {
   .ms-modal {
@@ -18,11 +16,7 @@
     left: 0;
   }
 }
-.ms-modal.active {
-  background-color: rgba(0, 0, 0, 0.3);
-  visibility: visible;
-  opacity: 1;
-}
+
 .ms-modal .container {
   background-color: #fff;
   border-radius: 10px;

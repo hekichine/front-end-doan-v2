@@ -9,7 +9,6 @@ import "./userTable.css";
 import { useDispatch } from "react-redux";
 
 const UserTable = (props) => {
-  const [active, setActive] = useState(false);
   const dispatch = useDispatch();
   let dataUser = props.dataUser;
   let search = props.search;
@@ -57,11 +56,12 @@ const UserTable = (props) => {
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
+            <th>User avatar</th>
+            <th>Full Name</th>
             <th>User name</th>
-            <th>Address</th>
             <th>Phone number</th>
             <th>Email</th>
+            <th>Role</th>
             <th></th>
           </tr>
         </thead>
@@ -75,7 +75,8 @@ const UserTable = (props) => {
                 } else if (
                   user.fullname.toLowerCase().includes(search.toLowerCase()) ||
                   user.username.toLowerCase().includes(search.toLowerCase()) ||
-                  user.address.toLowerCase().includes(search.toLowerCase())
+                  user.email.toLowerCase().includes(search.toLowerCase()) ||
+                  user.phone.toLowerCase().includes(search.toLowerCase())
                 ) {
                   return user;
                 }
@@ -83,26 +84,39 @@ const UserTable = (props) => {
               .map((item, index) => (
                 <>
                   <tr key={item}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td>
-                      {item.fullname}{" "}
+                      {" "}
                       <img
-                        src={`http://localhost:8080/${item.user_avt}`}
-                        style={{ width: "150px", height: "150px" }}
+                        src={`http://localhost:8080/${item.user_image}`}
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "100%",
+                        }}
                       />
                     </td>
+                    <td>{item.fullname} </td>
                     <td>{item.username}</td>
-                    <td>{item.address}</td>
                     <td>{item.phone}</td>
                     <td>{item.email}</td>
+                    <td>{item.role === 1 ? "Admin" : "Member"}</td>
                     <td>
                       {item.role === 1 ? (
                         <>
-                          <span>Admin</span>
+                          <Link
+                            to={"/dashboard/account/detail"}
+                            className="edit"
+                            title=""
+                            data-toggle="tooltip"
+                            data-original-title="Edit"
+                            onClick={() => handleEdit(item)}
+                          >
+                            <i className="fa-solid fa-pen-to-square"></i>
+                          </Link>
                         </>
                       ) : (
                         <>
-                          {" "}
                           <Link
                             to={"/dashboard/account/detail"}
                             className="edit"

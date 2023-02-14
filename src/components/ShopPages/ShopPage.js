@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "../ProductList/Product";
 import axios from "axios";
+import RingLoader from "react-spinners/RingLoader";
 
 import "./ShopPage.css";
 import ReactPaginate from "react-paginate";
@@ -12,6 +13,10 @@ const ShopPage = () => {
   const [data, setData] = useState();
   const [page, setPage] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [heading, setHeading] = useState("");
+  const [fintProduct, setFindProduct] = useState(0);
+
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
     setCurrentPage(numpage);
@@ -19,15 +24,25 @@ const ShopPage = () => {
 
   useEffect(() => {
     const getAll = async (currentPage) => {
+      setLoading(true);
       let result = await axios.get(
-        `http://localhost:8080/api/product/getall?page=${currentPage}&limit=8`
+        `http://localhost:8080/api/product/getall?page=${currentPage}&limit=12`
       );
+
       if (result.data.error === 0) {
         setPage(result.data.pageCount);
         setData(result.data.rows);
+        setHeading(result.data.message);
+        setFindProduct(result.data.rows.length);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     };
     getAll(currentPage);
+    return () => {
+      clearTimeout();
+    };
   }, [currentPage]);
   return (
     <>
@@ -35,7 +50,7 @@ const ShopPage = () => {
         <div className="home-section">
           <section className="bg-light py-5">
             <div className="container">
-              <h2 className="text-black">Category: Book</h2>
+              <h2 className="text-black">{heading}</h2>
               <ol className="breadcrumb ondark mb-0">
                 <li className="breadcrumb-item">
                   <Link to={"/"}>Home</Link>
@@ -295,7 +310,9 @@ const ShopPage = () => {
                 </aside>
                 <main className="col-lg-9">
                   <header className="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-                    <strong className="d-block py-2">32 Items found </strong>
+                    <strong className="d-block py-2">
+                      {fintProduct} Items found
+                    </strong>
                     <div className="ms-auto ">
                       <select className="form-select d-inline-block w-auto me-1">
                         <option value="0">Best match</option>
@@ -306,10 +323,22 @@ const ShopPage = () => {
                     </div>
                   </header>
 
-                  <div className="row gx-4 gy-3">
-                    {data &&
-                      data.length > 0 &&
-                      data?.map((item, index) => <Product data={item} />)}
+                  <div className="row gx-4 gy-3 ">
+                    {loading ? (
+                      <>
+                        <div className="ms-loader text-center">
+                          <RingLoader
+                            color="#36d7b7"
+                            size={"100px"}
+                            className="mx-auto"
+                          />
+                        </div>
+                      </>
+                    ) : (
+                      data &&
+                      data?.length > 0 &&
+                      data?.map((item, index) => <Product data={item} />)
+                    )}
                   </div>
 
                   <hr />

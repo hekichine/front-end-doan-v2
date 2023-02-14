@@ -16,10 +16,9 @@ const Modal = (props) => {
 
   const [id, setId] = useState(user?.id);
   const [username, setUsername] = useState(user?.username);
-  const [avt, setAvt] = useState(user?.user_avt);
+  const [avt, setAvt] = useState(user?.user_image);
   const [password, setPassword] = useState(user?.password);
   const [fullname, setFullname] = useState(user?.fullname);
-  const [address, setAddress] = useState(user?.address);
   const [email, setEmail] = useState(user?.email);
   const [phone, setPhone] = useState(user?.phone);
   const [role, setRole] = useState(user?.role);
@@ -46,11 +45,10 @@ const Modal = (props) => {
       let formData = new FormData();
       formData.append("id", id);
       formData.append("username", username);
-      formData.append("user_avt", avt);
+      formData.append("user_image", avt);
       formData.append("password", password);
       formData.append("fullname", fullname);
       formData.append("email", email);
-      formData.append("address", address);
       formData.append("phone", phone);
       formData.append("role", role);
       // let userUpdate = {
@@ -149,17 +147,7 @@ const Modal = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="address">Address</label>
-              <input
-                type="text"
-                className="form-control my-1"
-                id="address"
-                value={address}
-                placeholder={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
+
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
               <label htmlFor="email">Email</label>
               <input

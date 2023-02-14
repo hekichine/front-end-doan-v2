@@ -47,7 +47,7 @@ const Dashboard = () => {
                   <div className="sb-sidenav-menu-heading">
                     <div className="ms-menu-avt">
                       <img
-                        src={`http://localhost:8080/${user.user_avt}`}
+                        src={`http://localhost:8080/${user.user_image}`}
                         alt=""
                       />
                     </div>
@@ -89,8 +89,8 @@ const Dashboard = () => {
                       <Link className="nav-link" to="/dashboard/products">
                         Products
                       </Link>
-                      <Link className="nav-link" to="/dashboard/categories">
-                        Categories
+                      <Link className="nav-link" to="/dashboard/collection">
+                        Collection
                       </Link>
                     </nav>
                   </div>
@@ -127,12 +127,9 @@ const Dashboard = () => {
                         Account
                       </Link>
 
-                      {/* <Link
-                        className="nav-link collapsed"
-                        to="/dashboard/logout"
-                      >
+                      <Link className="nav-link collapsed" to="/signout">
                         Logout
-                      </Link> */}
+                      </Link>
                     </nav>
                   </div>
                 </div>

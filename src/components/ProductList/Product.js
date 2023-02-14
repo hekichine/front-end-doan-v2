@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FiShoppingBag } from "react-icons/fi";
 
@@ -6,7 +6,6 @@ import "./Product.css";
 
 const Product = (props) => {
   let data = props.data;
-  console.log(data);
 
   return (
     <>
@@ -37,8 +36,11 @@ const Product = (props) => {
             )}
           </div>
           <div className="ms-product-content">
-            <h3 className="ms-product-title">
-              <Link to={`/product/${data.id}`}>{data.product_name}</Link>
+            <h3 className="ms-product-title ms-pr">
+              <Link to={`/product/${data.id}`} title={data.product_name}>
+                {data.product_name}
+              </Link>
+              <span className="ms-pa ms-tooltip">{data.product_name}</span>
             </h3>
             <p className="ms-product-price">
               {data.sale === 0 ? (

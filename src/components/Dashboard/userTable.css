@@ -9,3 +9,6 @@ tr td .edit {
   outline: none;
   background-color: transparent;
 }
+.user-table tr {
+  vertical-align: middle;
+}

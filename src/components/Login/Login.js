@@ -19,7 +19,11 @@ const Login = () => {
         username: username,
         password: password,
       };
-      let data = await axios.post("http://localhost:8080/api/user/login", user);
+      let data = await axios.post(
+        "http://localhost:8080/api/user/signin",
+        user
+      );
+      // console.log(data.data);
       if (data.data.error === 1) {
         toast.error(`${data.data.message}`, {
           position: "top-right",
@@ -43,9 +47,9 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      localStorage.setItem("user", JSON.stringify(data.data.user_info[0]));
+      localStorage.setItem("user", JSON.stringify(data.data.rows[0]));
       setTimeout(() => {
-        if (data.data.user_info[0].role === 1) {
+        if (data.data.rows[0].role === 1) {
           navigation("/dashboard");
         } else {
           navigation("/");
@@ -55,7 +59,9 @@ const Login = () => {
   };
 
   useEffect(() => {
-    return clearTimeout();
+    return () => {
+      clearTimeout();
+    };
   }, []);
   return (
     <>

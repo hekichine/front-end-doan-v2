@@ -17,6 +17,8 @@ import Logout from "./components/Logout/Logout";
 import Modal from "./components/Dashboard/Modal/Modal";
 
 function App() {
+  let user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="App">
       <Routes>

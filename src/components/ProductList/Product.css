@@ -70,6 +70,23 @@
 }
 .ms-product-inner .ms-product-title a {
   transition: 0.25s ease-in-out;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.ms-product-inner .ms-product-title .ms-tooltip {
+  top: -100%;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  color: #fff;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 400;
+  transition: all 0.25s ease-in-out;
+  display: none;
 }
 .ms-product-inner .ms-product-price {
   font-size: 16px;

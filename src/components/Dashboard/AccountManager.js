@@ -2,22 +2,40 @@ import React, { useState, useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 import UserTable from "./UserTable";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const AccountManager = () => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  let callDataUser = async () => {
-    let data = await axios.get("http://localhost:8080/api/user/getalluser");
-    if (data && data.data.error !== "0") {
-      setUser(data.data.list_user);
-      setLoading(!loading);
-      return;
-    }
+
+  const handlePageClick = (dt) => {
+    let numpage = dt.selected + 1;
+    setCurrentPage(numpage);
   };
+
   useEffect(() => {
-    callDataUser();
-  }, []);
+    setLoading(true);
+    let callDataUser = async (currentPage) => {
+      let data = await axios.get(
+        `http://localhost:8080/api/user/getall?page=${currentPage}&limit=10`
+      );
+      // console.log(data.data);
+      if (data && data.data.error !== "0") {
+        setUser(data.data.rows);
+        setPage(data.data.pageCount);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }
+    };
+    callDataUser(currentPage);
+    return () => {
+      clearTimeout();
+    };
+  }, [currentPage]);
   return (
     <>
       <div className="container-fluid">
@@ -48,6 +66,26 @@ const AccountManager = () => {
                   search={search}
                 />
               )}
+              <nav className="ms-3">
+                <ReactPaginate
+                  previousLabel={"Previous"}
+                  nextLabel={"Next"}
+                  breakLabel={"..."}
+                  pageCount={page}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={1}
+                  onPageChange={handlePageClick}
+                  containerClassName={"pagination"}
+                  pageClassName={"page-item"}
+                  pageLinkClassName={"page-link"}
+                  previousClassName={"page-item"}
+                  previousLinkClassName={"page-link"}
+                  nextClassName={"page-item"}
+                  nextLinkClassName={"page-link"}
+                  breakClassName={"page-item"}
+                  breakLinkClassName={"page-link"}
+                />
+              </nav>
             </div>
           </div>
         </div>

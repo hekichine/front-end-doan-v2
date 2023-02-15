@@ -16,6 +16,7 @@ const ShopPage = () => {
   const [loading, setLoading] = useState(false);
   const [heading, setHeading] = useState("");
   const [fintProduct, setFindProduct] = useState(0);
+  const [err, setErr] = useState(false);
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
@@ -25,6 +26,7 @@ const ShopPage = () => {
   useEffect(() => {
     const getAll = async (currentPage) => {
       setLoading(true);
+      setErr(false);
       let result = await axios.get(
         `http://localhost:8080/api/product/getall?page=${currentPage}&limit=12`
       );
@@ -36,6 +38,10 @@ const ShopPage = () => {
         setFindProduct(result.data.rows.length);
         setTimeout(() => {
           setLoading(false);
+        }, 500);
+      } else {
+        setTimeout(() => {
+          setErr(true);
         }, 500);
       }
     };
@@ -132,88 +138,29 @@ const ShopPage = () => {
                           data-bs-target="#collapse_aside_brands"
                         >
                           <i className="icon-control fa fa-chevron-down"></i>{" "}
-                          Brands
+                          Language
                         </Link>
                       </header>
                       <div className="collapse show" id="collapse_aside_brands">
                         <div className="card-body">
-                          <label className="form-check mb-2">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                            />
-                            <span className="form-check-label"> Mercedes </span>
-                            <b className="badge rounded-pill bg-gray-dark float-end">
-                              120
-                            </b>
-                          </label>
-
-                          <label className="form-check mb-2">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                            />
-                            <span className="form-check-label"> Toyota </span>
-                            <b className="badge rounded-pill bg-gray-dark float-end">
-                              15
-                            </b>
-                          </label>
-
-                          <label className="form-check mb-2">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                            />
-                            <span className="form-check-label">
-                              {" "}
-                              Mitsubishi{" "}
-                            </span>
-                            <b className="badge rounded-pill bg-gray-dark float-end">
-                              35
-                            </b>
-                          </label>
-
-                          <label className="form-check mb-2">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                            />
-                            <span className="form-check-label"> Nissan </span>
-                            <b className="badge rounded-pill bg-gray-dark float-end">
-                              89
-                            </b>
-                          </label>
-
-                          <label className="form-check mb-2">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                            />
-                            <span className="form-check-label"> Honda </span>
-                            <b className="badge rounded-pill bg-gray-dark float-end">
-                              30
-                            </b>
-                          </label>
-
-                          <label className="form-check mb-2">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              value=""
-                            />
-                            <span className="form-check-label">
-                              {" "}
-                              Honda accord{" "}
-                            </span>
-                            <b className="badge rounded-pill bg-gray-dark float-end">
-                              30
-                            </b>
-                          </label>
+                          {data &&
+                            data?.length > 0 &&
+                            data
+                              .filter((item, index) => {
+                                // loc trung nhau
+                              })
+                              .map((item) => (
+                                <label className="form-check mb-2">
+                                  <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                  />
+                                  <span className="form-check-label">
+                                    {item.language}
+                                  </span>
+                                </label>
+                              ))}
                         </div>
                       </div>
                     </article>
@@ -327,11 +274,15 @@ const ShopPage = () => {
                     {loading ? (
                       <>
                         <div className="ms-loader text-center">
-                          <RingLoader
-                            color="#36d7b7"
-                            size={"100px"}
-                            className="mx-auto"
-                          />
+                          {err ? (
+                            <>Load data faild</>
+                          ) : (
+                            <RingLoader
+                              color="#36d7b7"
+                              size={"100px"}
+                              className="mx-auto"
+                            />
+                          )}
                         </div>
                       </>
                     ) : (

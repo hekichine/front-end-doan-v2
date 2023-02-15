@@ -86,7 +86,7 @@ const Dashboard = () => {
                     data-bs-parent="#sidenavAccordion"
                   >
                     <nav className="sb-sidenav-menu-nested nav">
-                      <Link className="nav-link" to="/dashboard/products">
+                      <Link className="nav-link" to="/dashboard/product">
                         Products
                       </Link>
                       <Link className="nav-link" to="/dashboard/collection">

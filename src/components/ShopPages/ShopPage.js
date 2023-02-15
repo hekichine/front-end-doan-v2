@@ -17,6 +17,7 @@ const ShopPage = () => {
   const [heading, setHeading] = useState("");
   const [fintProduct, setFindProduct] = useState(0);
   const [err, setErr] = useState(false);
+  const [language, setLanguage] = useState();
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
@@ -36,6 +37,7 @@ const ShopPage = () => {
         setData(result.data.rows);
         setHeading(result.data.message);
         setFindProduct(result.data.rows.length);
+
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -129,7 +131,7 @@ const ShopPage = () => {
                       </div>
                     </article>
 
-                    <article className="filter-group">
+                    <article className="filter-group d-none">
                       <header className="card-header">
                         <Link
                           to={""}
@@ -143,13 +145,11 @@ const ShopPage = () => {
                       </header>
                       <div className="collapse show" id="collapse_aside_brands">
                         <div className="card-body">
-                          {data &&
-                            data?.length > 0 &&
-                            data
-                              .filter((item, index) => {
-                                // loc trung nhau
-                              })
-                              .map((item) => (
+                          {/* {language &&
+                            language?.length > 0 &&
+                            language.map((item) => (
+                              <>
+                                {item}
                                 <label className="form-check mb-2">
                                   <input
                                     className="form-check-input"
@@ -157,10 +157,11 @@ const ShopPage = () => {
                                     value=""
                                   />
                                   <span className="form-check-label">
-                                    {item.language}
+                                    {item}
                                   </span>
                                 </label>
-                              ))}
+                              </>
+                            ))} */}
                         </div>
                       </div>
                     </article>
@@ -179,11 +180,16 @@ const ShopPage = () => {
                       </header>
                       <div className="collapse show" id="collapse_aside2">
                         <div className="card-body">
+                          <label for="customRange3" class="form-label">
+                            Example range
+                          </label>
                           <input
                             type="range"
-                            className="form-range"
+                            class="form-range"
                             min="0"
-                            max="100"
+                            max="1000"
+                            step="1"
+                            id="customRange3"
                           />
                           <div className="row mb-3">
                             <div className="col-6">

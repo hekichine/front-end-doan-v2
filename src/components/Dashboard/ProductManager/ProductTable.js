@@ -3,23 +3,23 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
-import { addUser } from "../../redux/userSlice";
+import { addProduct } from "../../../redux/productSlice";
 
-import "./userTable.css";
+import "../userTable.css";
 import { useDispatch } from "react-redux";
 
-const UserTable = (props) => {
+const ProductTable = (props) => {
   const dispatch = useDispatch();
-  let dataUser = props.dataUser;
+  let dataProduct = props.dataProduct;
   let search = props.search;
-  let setReUser = props.setReUser;
+  let setReProduct = props.setReProduct;
 
   const handleEdit = (item) => {
-    dispatch(addUser(item));
+    dispatch(addProduct(item));
   };
   const handleDelete = async (item) => {
     let data = await axios.delete(
-      `http://localhost:8080/api/user/delete/${item.id}`
+      `http://localhost:8080/api/product/delete/${item.id}`
     );
 
     if (data.data.error === 0) {
@@ -33,8 +33,8 @@ const UserTable = (props) => {
         progress: undefined,
         theme: "light",
       });
-      let newUSer = dataUser.filter((user) => user.id !== item.id);
-      setReUser(newUSer);
+      let newUSer = dataProduct.filter((product) => product.id !== item.id);
+      setReProduct(newUSer);
       return;
     }
     toast.error(`${data.data.message}`, {
@@ -49,58 +49,60 @@ const UserTable = (props) => {
     });
     return;
   };
-
   return (
     <>
-      <table className="user-table table table-striped table-hover table-bordered">
+      <table className="product-table table table-striped table-hover table-bordered">
         <thead>
           <tr>
             <th></th>
-            <th>User avatar</th>
-            <th>Full Name</th>
-            <th>User name</th>
-            <th>Phone number</th>
-            <th>Email</th>
-            <th>Role</th>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Product image</th>
+            <th>Quantity</th>
+            <th>Language</th>
+            <th>Publisher</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {dataUser &&
-            dataUser.length > 0 &&
-            dataUser
-              .filter((user) => {
+          {dataProduct &&
+            dataProduct.length > 0 &&
+            dataProduct
+              .filter((product) => {
                 if (search === "") {
-                  return user;
+                  return product;
                 } else if (
-                  user.fullname.toLowerCase().includes(search.toLowerCase()) ||
-                  user.username.toLowerCase().includes(search.toLowerCase()) ||
-                  user.email.toLowerCase().includes(search.toLowerCase()) ||
-                  user.phone.toLowerCase().includes(search.toLowerCase())
+                  product.product_name
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  product.language
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  product.publisher.toLowerCase().includes(search.toLowerCase())
                 ) {
-                  return user;
+                  return product;
                 }
               })
               .map((item, index) => (
                 <>
                   <tr key={item}>
                     <td>{index + 1}</td>
+                    <td>{item.product_name}</td>
+                    <td>{item.price} </td>
+                    <td className="product-description">{item.description}</td>
                     <td>
-                      {" "}
                       <img
-                        src={`http://localhost:8080/${item.user_image}`}
+                        src={`http://localhost:8080/${item.product_image}`}
                         style={{
-                          width: "40px",
-                          height: "40px",
-                          borderRadius: "100%",
+                          width: "60px",
+                          height: "100px",
                         }}
                       />
                     </td>
-                    <td>{item.fullname} </td>
-                    <td>{item.username}</td>
-                    <td>{item.phone}</td>
-                    <td>{item.email}</td>
-                    <td>{item.role === 1 ? "Admin" : "Member"}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.language}</td>
+                    <td>{item.publisher}</td>
                     <td>
                       {item.role === 1 ? (
                         <>
@@ -118,7 +120,7 @@ const UserTable = (props) => {
                       ) : (
                         <>
                           <Link
-                            to={"/dashboard/account/detail"}
+                            to={"/dashboard/product/detail"}
                             className="edit"
                             title=""
                             data-toggle="tooltip"
@@ -148,4 +150,4 @@ const UserTable = (props) => {
   );
 };
 
-export default UserTable;
+export default ProductTable;

@@ -5,27 +5,27 @@ import axios from "axios";
 import "./Modal.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import { removeUser } from "../../../redux/userSlice";
+import { removeProduct } from "../../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
-const Modal = (props) => {
-  const user = useSelector((state) => state.user.data);
+const ModalProduct = (props) => {
+  const product = useSelector((state) => state.product.data);
 
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
-  const [id, setId] = useState(user?.id);
-  const [username, setUsername] = useState(user?.username);
-  const [avt, setAvt] = useState(user?.user_image);
-  const [password, setPassword] = useState(user?.password);
-  const [fullname, setFullname] = useState(user?.fullname);
-  const [email, setEmail] = useState(user?.email);
-  const [phone, setPhone] = useState(user?.phone);
-  const [role, setRole] = useState(user?.role);
+  const [id, setId] = useState(product?.id);
+  const [username, setProductname] = useState(product?.username);
+  const [avt, setAvt] = useState(product?.user_image);
+  const [password, setPassword] = useState(product?.password);
+  const [fullname, setFullname] = useState(product?.fullname);
+  const [email, setEmail] = useState(product?.email);
+  const [phone, setPhone] = useState(product?.phone);
+  const [role, setRole] = useState(product?.role);
 
   const handleCancel = () => {
-    dispatch(removeUser());
-    navigation("/dashboard/account");
+    dispatch(removeProduct());
+    navigation("/dashboard/product");
   };
   const handleSubmit = async () => {
     if (email && password) {
@@ -52,8 +52,8 @@ const Modal = (props) => {
       formData.append("phone", phone);
       formData.append("role", role);
       // let userUpdate = {
-      //   id: user?.id,
-      //   username: user.username,
+      //   id: product?.id,
+      //   username: product.username,
       //   user_avt: avt,
       //   password: password,
       //   fullname: fullname,
@@ -65,7 +65,7 @@ const Modal = (props) => {
       // console.log(formData);
       // return;
       let data = await axios.post(
-        "http://localhost:8080/api/user/update",
+        "http://localhost:8080/api/product/update",
         formData
       );
 
@@ -113,10 +113,10 @@ const Modal = (props) => {
     <>
       <div className={`ms-modal ms-pf`}>
         <div className="container">
-          <div className="ms-section-heading my-3">Update User</div>
+          <div className="ms-section-heading my-3">Update product</div>
           <div className="row gx-3 gy-3">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="username">User name</label>
+              <label htmlFor="username">product name</label>
               <input
                 type="text"
                 className="form-control my-1"
@@ -219,4 +219,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default ModalProduct;

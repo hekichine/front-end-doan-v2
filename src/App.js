@@ -15,10 +15,10 @@ import AccountManager from "./components/Dashboard/AccountManager";
 import { ToastContainer } from "react-toastify";
 import Logout from "./components/Logout/Logout";
 import Modal from "./components/Dashboard/Modal/Modal";
+import { useSelector } from "react-redux";
+import ProductManager from "./components/Dashboard/ProductManager/ProductManager";
 
 function App() {
-  let user = JSON.parse(localStorage.getItem("user"));
-
   return (
     <div className="App">
       <Routes>
@@ -33,6 +33,8 @@ function App() {
           <Route path="" element={<Admin />} />
           <Route path="account" element={<AccountManager />} />
           <Route path="account/detail" element={<Modal />} />
+          <Route path="product" element={<ProductManager />} />
+          <Route path="product/detail" element={<Modal />} />
         </Route>
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />

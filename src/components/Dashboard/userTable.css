@@ -1,14 +1,19 @@
 tr td .edit {
   margin-right: 10px;
 }
-.user-table {
+.user-table,
+.product-table {
   min-width: 950px;
 }
-.user-table tr button {
+.user-table tr button,
+.product-table tr button {
   border: none;
   outline: none;
   background-color: transparent;
 }
 .user-table tr {
+  vertical-align: middle;
+}
+.product-table tr {
   vertical-align: middle;
 }

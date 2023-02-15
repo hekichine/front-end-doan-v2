@@ -5,10 +5,13 @@ import { toast } from "react-toastify";
 
 import "./Login.css";
 import loginImage from "./1.webp";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/userSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const navigation = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -48,6 +51,7 @@ const Login = () => {
         theme: "light",
       });
       localStorage.setItem("user", JSON.stringify(data.data.rows[0]));
+      dispatch(addUser(data.data.rows[0]));
       setTimeout(() => {
         if (data.data.rows[0].role === 1) {
           navigation("/dashboard");

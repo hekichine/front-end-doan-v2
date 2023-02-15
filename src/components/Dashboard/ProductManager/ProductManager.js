@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BeatLoader } from "react-spinners";
-import UserTable from "./UserTable";
+import ProductTable from "./ProductTable";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 
-const AccountManager = () => {
-  const [user, setUser] = useState();
+const ProductManager = () => {
+  const [product, setProduct] = useState();
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,25 +14,25 @@ const AccountManager = () => {
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
     setCurrentPage(numpage);
-    console.log(currentPage);
+    // console.log(currentPage);
   };
 
   useEffect(() => {
     setLoading(true);
-    let callDataUser = async (currentPage) => {
+    let callDataProduct = async (currentPage) => {
       let data = await axios.get(
-        `http://localhost:8080/api/user/getall?page=${currentPage}&limit=5`
+        `http://localhost:8080/api/product/getall?page=${currentPage}&limit=5`
       );
-      // console.log(data.data);
+      console.log(data.data);
       if (data && data.data.error !== "0") {
-        setUser(data.data.rows);
+        setProduct(data.data.rows);
         setPage(data.data.pageCount);
         setTimeout(() => {
           setLoading(false);
         }, 500);
       }
     };
-    callDataUser(currentPage);
+    callDataProduct(currentPage);
     return () => {
       clearTimeout();
     };
@@ -45,13 +45,13 @@ const AccountManager = () => {
             <div className="card-header text-start d-flex justify-content-between">
               <div className="ms-table-title">
                 <i className="fas fa-table me-1"></i>
-                User Manager
+                Product Manager
               </div>
               <div className="ms-table-search">
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Search user"
+                  placeholder="Search product"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -61,9 +61,9 @@ const AccountManager = () => {
               {loading ? (
                 <BeatLoader color="#36d7b7" />
               ) : (
-                <UserTable
-                  setReUser={setUser}
-                  dataUser={user}
+                <ProductTable
+                  setReProduct={setProduct}
+                  dataProduct={product}
                   search={search}
                 />
               )}
@@ -95,4 +95,4 @@ const AccountManager = () => {
   );
 };
 
-export default AccountManager;
+export default ProductManager;

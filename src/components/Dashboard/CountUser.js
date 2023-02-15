@@ -16,7 +16,7 @@ const CountUser = () => {
   useEffect(() => {
     let fetchUser = async () => {
       let result = await axios.get(
-        "http://localhost:8080/api/user/getall?page=3&limit=3"
+        "http://localhost:8080/api/user/getall?page=1&limit=3"
       );
 
       if (result.data.error === 0) {
@@ -26,7 +26,7 @@ const CountUser = () => {
 
     let fetchProduct = async () => {
       let result = await axios.get(
-        "http://localhost:8080/api/product/getall?page=3&limit=3"
+        "http://localhost:8080/api/product/getall?page=1&limit=3"
       );
 
       if (result.data.error === 0) {

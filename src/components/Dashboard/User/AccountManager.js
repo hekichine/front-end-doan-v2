@@ -14,7 +14,6 @@ const AccountManager = () => {
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
     setCurrentPage(numpage);
-    console.log(currentPage);
   };
 
   useEffect(() => {

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
+import { AiOutlineUser } from "react-icons/ai";
+import { BsBoxArrowRight } from "react-icons/bs";
 
 import "./Header.css";
 const Header = () => {
@@ -52,13 +54,22 @@ const Header = () => {
                       Work
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <span className="nav-link">/</span>
-                  </li>
+                  </li> */}
                   {user ? (
                     <>
-                      <li>
+                      <li className="ms-pr ms-account-hover">
                         <span className="mx-3">Hi! {user.fullname}</span>
+                        <div className="ms-account ms-pa">
+                          <Link className="nav-link" to={""}>
+                            <AiOutlineUser /> Account
+                          </Link>
+
+                          <Link className="nav-link" to={"/signout"}>
+                            <BsBoxArrowRight /> Sign out
+                          </Link>
+                        </div>
                       </li>
                     </>
                   ) : (

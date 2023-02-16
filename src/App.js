@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import ShopPage from "./components/ShopPages/ShopPage";
 import Login from "./components/Login/Login";
@@ -11,12 +11,12 @@ import PageContent from "./components/HomePage/PageContent";
 import NotFound from "./components/404NotFound/NotFound";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Register from "./components/Login/Register";
-import AccountManager from "./components/Dashboard/AccountManager";
+import AccountManager from "./components/Dashboard/User/AccountManager";
 import { ToastContainer } from "react-toastify";
 import Logout from "./components/Logout/Logout";
 import Modal from "./components/Dashboard/Modal/Modal";
-import { useSelector } from "react-redux";
-import ProductManager from "./components/Dashboard/ProductManager/ProductManager";
+import ProductManager from "./components/Dashboard/Product/ProductManager/ProductManager";
+import UserContent from "./components/Dashboard/User/UserContent";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Admin />} />
-          <Route path="account" element={<AccountManager />} />
+          <Route path="account" element={<UserContent />} />
           <Route path="account/detail" element={<Modal />} />
           <Route path="product" element={<ProductManager />} />
           <Route path="product/detail" element={<Modal />} />

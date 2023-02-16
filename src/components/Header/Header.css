@@ -165,6 +165,38 @@
 .ms-header .ftco-navbar-light .navbar-toggler:focus {
   outline: none !important;
 }
+.ms-header .ms-account-hover {
+  padding: 15px 20px;
+}
+.ms-header .ms-account {
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 0.25s ease-in-out;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.ms-header .ms-account .nav-link {
+  color: #000;
+  transition: 0.25s ease-in-out;
+}
+.ms-header .ms-account .nav-link:hover {
+  color: #fff;
+  background-color: #fc7fb2;
+}
+.ms-header .ms-account-hover:hover .ms-account {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.ms-header .ms-cart-control:hover > * {
+  color: #fc7fb2;
+}
 
 @media (max-width: 991.98px) {
   .ms-header .ftco-navbar-light .navbar-toggler {

@@ -1,16 +1,36 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import "./Dashboard.css";
 import Social from "../Header/Social";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { HashLoader } from "react-spinners";
 
 const Dashboard = () => {
   const [toggleNav, setToggleNav] = useState(false);
+  const navigation = useNavigate();
   let user = JSON.parse(localStorage.getItem("user"));
 
   const handleNav = () => {
     setToggleNav(!toggleNav);
   };
+  useEffect(() => {
+    if (!user || user?.role !== 1) {
+      toast('🦄 You aren"t admin!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      navigation("/");
+    }
+  }, []);
+
   return (
     <>
       <section
@@ -47,12 +67,12 @@ const Dashboard = () => {
                   <div className="sb-sidenav-menu-heading">
                     <div className="ms-menu-avt">
                       <img
-                        src={`http://localhost:8080/${user.user_image}`}
+                        src={`http://localhost:8080/${user?.user_image}`}
                         alt=""
                       />
                     </div>
                     <div className="ms-user-info">
-                      <p>{user.fullname}</p>
+                      <p>{user?.fullname}</p>
                       <span>Admin</span>
                     </div>
                   </div>

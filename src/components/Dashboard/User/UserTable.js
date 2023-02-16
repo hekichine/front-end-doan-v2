@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
-import { addUser } from "../../redux/userSlice";
+import { addUser } from "../../../redux/userSlice";
 
 import "./userTable.css";
 import { useDispatch } from "react-redux";

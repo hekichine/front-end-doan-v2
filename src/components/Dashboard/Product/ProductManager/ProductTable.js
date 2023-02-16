@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
-import { addProduct } from "../../../redux/productSlice";
+import { addProduct } from "../../../../redux/productSlice";
 
-import "../userTable.css";
+import "../../User/userTable.css";
 import { useDispatch } from "react-redux";
 
 const ProductTable = (props) => {
@@ -79,17 +79,23 @@ const ProductTable = (props) => {
                   product.language
                     .toLowerCase()
                     .includes(search.toLowerCase()) ||
-                  product.publisher.toLowerCase().includes(search.toLowerCase())
+                  product.publisher
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  product.price
+                    .toString()
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
                 ) {
                   return product;
                 }
               })
               .map((item, index) => (
                 <>
-                  <tr key={item}>
+                  <tr key={item.id}>
                     <td>{index + 1}</td>
                     <td>{item.product_name}</td>
-                    <td>{item.price} </td>
+                    <td>{item.price}đ</td>
                     <td className="product-description">{item.description}</td>
                     <td>
                       <img

@@ -47,7 +47,29 @@ const AddProduct = (props) => {
       "http://localhost:8080/api/product/add",
       product
     );
-    console.log(result);
+    if (result.data.error === 0) {
+      toast.success("🦄 Wow add product successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+    toast.error("🦄 Add product failed!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
   return (
     <>
@@ -57,11 +79,11 @@ const AddProduct = (props) => {
             <div className="accordion-item">
               <h2 className="accordion-header" id="headingOne">
                 <button
-                  className="accordion-button"
+                  className="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
-                  aria-expanded="true"
+                  aria-expanded="false"
                   aria-controls="collapseOne"
                 >
                   Add product
@@ -69,7 +91,7 @@ const AddProduct = (props) => {
               </h2>
               <div
                 id="collapseOne"
-                className="accordion-collapse collapse show"
+                className="accordion-collapse collapse"
                 aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample"
               >
@@ -128,16 +150,16 @@ const AddProduct = (props) => {
                       </div>
                     </div>
                     <div className="mb-3 col-12">
-                      <div class="form-floating">
+                      <div className="form-floating">
                         <textarea
-                          class="form-control"
+                          className="form-control"
                           placeholder="Leave a comment here"
                           id="floatingTextarea2"
                           style={{ height: "150px" }}
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
                         ></textarea>
-                        <label for="floatingTextarea2">Description</label>
+                        <label htmlFor="floatingTextarea2">Description</label>
                       </div>
                     </div>
                     <div className="mb-3 col-12 col-md-6">
@@ -168,7 +190,7 @@ const AddProduct = (props) => {
                     </div>
                     <div className="mb-3 col-12 col-md-6">
                       <select
-                        class=" form-select"
+                        className=" form-select"
                         aria-label="Category"
                         id="formSelectCategory"
                         onChange={(e) => setCategory(e.target.value)}
@@ -186,12 +208,12 @@ const AddProduct = (props) => {
                       </select>
                     </div>
 
-                    <div class="mb-3 col-12 col-md-6 text-start">
-                      <label for="formFileMultiple" class="form-label">
+                    <div className="mb-3 col-12 col-md-6 text-start">
+                      <label htmlFor="formFileMultiple" className="form-label">
                         Choose multi images (Maximum 3 images)
                       </label>
                       <input
-                        class="form-control"
+                        className="form-control"
                         type="file"
                         id="formFileMultiple"
                         multiple

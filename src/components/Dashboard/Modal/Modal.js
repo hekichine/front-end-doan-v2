@@ -3,30 +3,42 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 import "./Modal.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { removeUser } from "../../../redux/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Modal = (props) => {
-  const user = useSelector((state) => state.user.data);
-
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
-  const [id, setId] = useState(user?.id);
-  const [username, setUsername] = useState(user?.username);
-  const [avt, setAvt] = useState(user?.user_image);
-  const [password, setPassword] = useState(user?.password);
-  const [fullname, setFullname] = useState(user?.fullname);
-  const [email, setEmail] = useState(user?.email);
-  const [phone, setPhone] = useState(user?.phone);
-  const [role, setRole] = useState(user?.role);
+  const [username, setUsername] = useState();
+  const [avt, setAvt] = useState();
+  const [password, setPassword] = useState();
+  const [fullname, setFullname] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [role, setRole] = useState();
 
   const handleCancel = () => {
-    dispatch(removeUser());
     navigation("/dashboard/account");
   };
+  useEffect(() => {
+    let getData = async (id) => {
+      let result = await axios.get(`http://localhost:8080/api/user/find/${id}`);
+      if (result.data.error === 0) {
+        let user = result.data.rows[0];
+        setUsername(user?.username);
+        setAvt(user?.avt);
+        setPassword(user?.password);
+        setFullname(user?.fullname);
+        setEmail(user?.email);
+        setPhone(user?.phone);
+        setRole(user?.role);
+      }
+    };
+    getData(id);
+  }, [id]);
   const handleSubmit = async () => {
     if (email && password) {
       if (password.length <= 5) {

@@ -17,6 +17,7 @@ import Logout from "./components/Logout/Logout";
 import Modal from "./components/Dashboard/Modal/Modal";
 import ProductManager from "./components/Dashboard/Product/ProductManager/ProductManager";
 import UserContent from "./components/Dashboard/User/UserContent";
+import ModalProduct from "./components/Dashboard/Modal/ModalProduct";
 
 function App() {
   return (
@@ -32,9 +33,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Admin />} />
           <Route path="account" element={<UserContent />} />
-          <Route path="account/detail" element={<Modal />} />
+          <Route path="account/:id" element={<Modal />} />
           <Route path="product" element={<ProductManager />} />
-          <Route path="product/detail" element={<Modal />} />
+          <Route path="product/:id" element={<ModalProduct />} />
         </Route>
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />

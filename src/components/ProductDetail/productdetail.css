@@ -1,0 +1,131 @@
+.ms-pr-detail .card {
+  border: none;
+}
+.ms-pr-detail .product {
+  background-color: #eee;
+  height: 100%;
+}
+.ms-pr-detail .brand {
+  font-size: 13px;
+}
+.ms-pr-detail .act-price {
+  color: red;
+  font-weight: 700;
+}
+.ms-pr-detail .dis-price {
+  text-decoration: line-through;
+}
+.ms-pr-detail .about {
+  font-size: 14px;
+}
+.ms-pr-detail .color {
+  margin-bottom: 10px;
+}
+.ms-pr-detail label.radio {
+  cursor: pointer;
+}
+.ms-pr-detail label.radio input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.ms-pr-detail label.radio span {
+  padding: 2px 9px;
+  border: 2px solid #ff0000;
+  display: inline-block;
+  color: #ff0000;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.ms-pr-detail label.radio input:checked + span {
+  border-color: #ff0000;
+  background-color: #ff0000;
+  color: #fff;
+}
+.ms-pr-detail .btn-danger {
+  background-color: #ff0000 !important;
+  border-color: #ff0000 !important;
+}
+.ms-pr-detail .btn-danger:hover {
+  background-color: #da0606 !important;
+  border-color: #da0606 !important;
+}
+.ms-pr-detail .btn-danger:focus {
+  box-shadow: none;
+}
+.ms-pr-detail .cart i {
+  margin-right: 10px;
+}
+
+.ms-pr-detail .images .main-image {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.ms-pr-detail .images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ms-pr-detail .thumbnail {
+  max-height: 100px;
+  overflow: hidden;
+  display: flex;
+  gap: 10px;
+}
+.ms-pr-detail .thumbnail .ms-img {
+  width: 33%;
+}
+.ms-pr-detail .thumbnail .ms-img:hover {
+  cursor: pointer;
+}
+.ms-pr-detail .product {
+  padding: 30px;
+}
+.ms-pr-detail .ms-form-count {
+  display: flex;
+  max-width: 280px;
+  align-items: center;
+}
+
+.ms-pr-detail .ms-form-count input {
+  width: 70px;
+  height: 35px;
+  border: none;
+  border-radius: 0;
+  text-overflow: ellipsis;
+  padding: 0;
+}
+.ms-pr-detail .ms-form-count input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: none;
+  outline: 0;
+  box-shadow: none;
+}
+.ms-pr-detail .ms-form-count button {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+}
+.ms-pr-detail .ms-stock span {
+  font-size: 16px;
+  font-weight: 500;
+}
+.ms-pr-detail .ms-stock .ms-sould-out {
+  text-decoration: line-through;
+}
+@media screen and (max-width: 425px) {
+  .ms-pr-detail .images .main-image {
+    height: 250px;
+  }
+}

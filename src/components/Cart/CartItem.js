@@ -1,36 +1,53 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CartItem = (props) => {
-  let data = props.data;
+  let product = props.product;
+  const [count, setCount] = useState(product?.count);
+
   return (
     <>
-      <tr>
+      <tr key={product.id}>
         <td>
           <figure className="itemside">
             <div className="aside">
-              <img src={data.image_url} alt="" className="img-sm" />
+              <img
+                src={`http://localhost:8080/${product?.product_image}`}
+                alt=""
+                className="img-sm"
+              />
             </div>
             <figcaption className="info">
-              <Link to="#" className="title text-dark">
-                {data.name}
+              <Link to={`/product/${product.id}`} className="title text-dark">
+                {product?.product_name}
               </Link>
-              <p className="text-muted small">Category: {data.category}</p>
+              <p className="text-muted small">Language: {product?.language}</p>
             </figcaption>
           </figure>
         </td>
         <td>
-          <input type="number" className="form-control" value={1} />
+          <input
+            type="number"
+            className="form-control"
+            value={count}
+            onChange={(e) => setCount(e.target.value)}
+          />
         </td>
         <td>
           <div className="price-wrap">
             <small
-              className="text-muted"
+              className="text-muted me-1"
               style={{ textDecoration: "line-through" }}
             >
-              {data.price - (data.price * data.sale) / 100}$
+              {product?.price}đ
             </small>
-            <var className="price">{data.price}$</var>
+            <span style={{ color: "red", fontWeight: "800" }}>
+              {product?.sale}% OFF
+            </span>
+            <var className="price">
+              {product?.price - (product?.price * product?.sale) / 100} đ
+            </var>
           </div>
         </td>
         <td className="text-right">

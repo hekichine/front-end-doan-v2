@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
 const Logout = () => {
   const navigation = useNavigate();
@@ -25,7 +26,16 @@ const Logout = () => {
     };
   }, []);
 
-  return <></>;
+  return (
+    <>
+      <div
+        className="ms-signout d-flex align-items-center justify-content-center"
+        style={{ height: "100vh" }}
+      >
+        <HashLoader color="#36d7b7" />
+      </div>
+    </>
+  );
 };
 
 export default Logout;

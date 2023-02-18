@@ -17,7 +17,6 @@ const ShopPage = () => {
   const [heading, setHeading] = useState("");
   const [fintProduct, setFindProduct] = useState(0);
   const [err, setErr] = useState(false);
-  const [language, setLanguage] = useState();
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
@@ -180,12 +179,12 @@ const ShopPage = () => {
                       </header>
                       <div className="collapse show" id="collapse_aside2">
                         <div className="card-body">
-                          <label for="customRange3" class="form-label">
+                          <label htmlFor="customRange3" className="form-label">
                             Example range
                           </label>
                           <input
                             type="range"
-                            class="form-range"
+                            className="form-range"
                             min="0"
                             max="1000"
                             step="1"
@@ -193,7 +192,7 @@ const ShopPage = () => {
                           />
                           <div className="row mb-3">
                             <div className="col-6">
-                              <label htmlFor="min" className="form-label">
+                              <label htmlhtmlFor="min" className="form-label">
                                 Min
                               </label>
                               <input
@@ -205,7 +204,7 @@ const ShopPage = () => {
                             </div>
 
                             <div className="col-6">
-                              <label htmlFor="max" className="form-label">
+                              <label htmlhtmlFor="max" className="form-label">
                                 Max
                               </label>
                               <input

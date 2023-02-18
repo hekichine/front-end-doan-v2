@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
-import "./Dashboard.css";
 import Social from "../Header/Social";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { HashLoader } from "react-spinners";
 
 const Dashboard = () => {
   const [toggleNav, setToggleNav] = useState(false);

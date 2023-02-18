@@ -5,7 +5,10 @@ import { AiOutlineUser } from "react-icons/ai";
 import { BsBoxArrowRight } from "react-icons/bs";
 
 import "./Header.css";
+import { useSelector } from "react-redux";
+
 const Header = () => {
+  const cart = useSelector((state) => state.cart);
   let user = JSON.parse(localStorage.getItem("user"));
 
   return (
@@ -23,7 +26,7 @@ const Header = () => {
               <div className="ms-cart-control ">
                 <Link to="/cart">
                   <FiShoppingCart size={"20px"} />
-                  <span>10</span>
+                  <span>{cart?.length | 0}</span>
                 </Link>
               </div>
               <button
@@ -62,6 +65,15 @@ const Header = () => {
                       <li className="ms-pr ms-account-hover">
                         <span className="mx-3">Hi! {user.fullname}</span>
                         <div className="ms-account ms-pa">
+                          {user.role === 1 ? (
+                            <>
+                              <Link className="nav-link" to={"/dashboard"}>
+                                <AiOutlineUser /> Admin
+                              </Link>
+                            </>
+                          ) : (
+                            <></>
+                          )}
                           <Link className="nav-link" to={""}>
                             <AiOutlineUser /> Account
                           </Link>

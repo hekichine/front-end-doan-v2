@@ -18,7 +18,9 @@ const ProductList = () => {
               data.length > 0 &&
               data
                 .slice(0, 8)
-                .map((item, index) => <Product data={item} key={index} />)}
+                .map((item, index) => (
+                  <Product data={item} key={index} incart={false} />
+                ))}
           </div>
         </div>
       </div>

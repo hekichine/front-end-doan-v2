@@ -1,22 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
 import { Link } from "react-router-dom";
-import { addUser } from "../../../redux/userSlice";
 
 import "./userTable.css";
-import { useDispatch } from "react-redux";
 
 const UserTable = (props) => {
-  const dispatch = useDispatch();
   let dataUser = props.dataUser;
   let search = props.search;
   let setReUser = props.setReUser;
 
-  const handleEdit = (item) => {
-    dispatch(addUser(item));
-  };
   const handleDelete = async (item) => {
     let data = await axios.delete(
       `http://localhost:8080/api/user/delete/${item.id}`
@@ -105,12 +99,11 @@ const UserTable = (props) => {
                       {item.role === 1 ? (
                         <>
                           <Link
-                            to={"/dashboard/account/detail"}
+                            to={`/dashboard/account/${item.id}`}
                             className="edit"
                             title=""
                             data-toggle="tooltip"
                             data-original-title="Edit"
-                            onClick={() => handleEdit(item)}
                           >
                             <i className="fa-solid fa-pen-to-square"></i>
                           </Link>
@@ -118,12 +111,11 @@ const UserTable = (props) => {
                       ) : (
                         <>
                           <Link
-                            to={"/dashboard/account/detail"}
+                            to={`/dashboard/account/${item.id}`}
                             className="edit"
                             title=""
                             data-toggle="tooltip"
                             data-original-title="Edit"
-                            onClick={() => handleEdit(item)}
                           >
                             <i className="fa-solid fa-pen-to-square"></i>
                           </Link>

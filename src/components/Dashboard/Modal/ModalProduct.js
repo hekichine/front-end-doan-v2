@@ -24,7 +24,6 @@ const ModalProduct = (props) => {
   const [role, setRole] = useState(product?.role);
 
   const handleCancel = () => {
-    dispatch(removeProduct());
     navigation("/dashboard/product");
   };
   const handleSubmit = async () => {
@@ -80,7 +79,7 @@ const ModalProduct = (props) => {
           progress: undefined,
           theme: "light",
         });
-        navigation("/dashboard/account");
+        navigation("/dashboard/product");
 
         return;
       }

@@ -31,7 +31,7 @@ const Login = () => {
         password: password,
       };
       let data = await axios.post(
-        "http://localhost:8080/api/user/register",
+        "http://localhost:8080/api/user/signup",
         user
       );
       if (data.data.error === 0) {

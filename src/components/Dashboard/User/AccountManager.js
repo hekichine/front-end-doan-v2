@@ -4,25 +4,32 @@ import UserTable from "./UserTable";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 
+import "./accountuser.css";
+
 const AccountManager = () => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [limit, setLimit] = useState(0);
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
     setCurrentPage(numpage);
   };
+  const handleView = () => {
+    let random = Math.floor(Math.random() * 1000);
+    setLimit(random);
+  };
 
   useEffect(() => {
     setLoading(true);
-    let callDataUser = async (currentPage) => {
+    let callDataUser = async (currentPage, limit) => {
       let data = await axios.get(
-        `http://localhost:8080/api/user/getall?page=${currentPage}&limit=5`
+        `http://localhost:8080/api/user/getall?page=${currentPage}&limit=${limit}`
       );
-      // console.log(data.data);
+      console.log(data.data);
       if (data && data.data.error !== "0") {
         setUser(data.data.rows);
         setPage(data.data.pageCount);
@@ -31,11 +38,11 @@ const AccountManager = () => {
         }, 500);
       }
     };
-    callDataUser(currentPage);
+    callDataUser(currentPage, limit);
     return () => {
       clearTimeout();
     };
-  }, [currentPage]);
+  }, [currentPage, limit]);
   return (
     <>
       <div className="container-fluid">
@@ -66,7 +73,7 @@ const AccountManager = () => {
                   search={search}
                 />
               )}
-              <nav className="ms-3">
+              <nav className="mx-3 my-2 d-flex justify-content-between">
                 <ReactPaginate
                   previousLabel={"Previous"}
                   nextLabel={"Next"}
@@ -85,6 +92,9 @@ const AccountManager = () => {
                   breakClassName={"page-item"}
                   breakLinkClassName={"page-link"}
                 />
+                <div className="ms-view-all">
+                  <button onClick={() => handleView()}> View all</button>
+                </div>
               </nav>
             </div>
           </div>

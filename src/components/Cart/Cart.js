@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import CurrencyFormat from "react-currency-format";
 import "./Cart.css";
 import CartItem from "./CartItem";
-import data from "../ProductList/dataProduct.js";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const Cart = () => {
+  let cart = useSelector((state) => state.cart);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    let total = 0;
+    cart.map(
+      (item) =>
+        (total += item.count * (item.price - (item.price * item.sale) / 100))
+    );
+    setTotalPrice(total);
+  }, []);
   return (
     <>
       <div className="ms-cart">
@@ -19,30 +31,40 @@ const Cart = () => {
                 <div className="card">
                   <table className="table table-borderless table-shopping-cart">
                     <thead className="text-muted">
-                      <tr className="small text-uppercase">
+                      <tr
+                        className="small text-uppercase "
+                        style={{ borderBottom: "1px solid #dee2e6" }}
+                      >
                         <th scope="col">Product</th>
-                        <th scope="col" width="120">
+                        <th scope="col" width="150">
                           Quantity
                         </th>
-                        <th scope="col" width="120">
+                        <th scope="col" width="150">
                           Price
                         </th>
-                        <th scope="col" className="text-right" width="200">
-                          {" "}
-                        </th>
+                        <th scope="col" className="text-right" width="200"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      {data.slice(0, 4).map((item, index) => (
-                        <CartItem data={item} />
-                      ))}
+                      {cart && cart?.length > 0 ? (
+                        cart?.map((item, index) => <CartItem product={item} />)
+                      ) : (
+                        <>
+                          <tr>
+                            <td colSpan="4">
+                              <div className="ms-cart-empty d-flex align-items-center justify-content-center my-5 color-red">
+                                <span style={{ color: "red" }}>Cart Empty</span>
+                              </div>
+                            </td>
+                          </tr>
+                        </>
+                      )}
                     </tbody>
                   </table>
 
                   <div className="card-body border-top">
                     <Link to="/shop" className="btn btn-light">
-                      {" "}
-                      <i className="fa fa-chevron-left"></i> Continue shopping{" "}
+                      <i className="fa fa-chevron-left"></i> Continue shopping
                     </Link>
                   </div>
                 </div>
@@ -55,40 +77,34 @@ const Cart = () => {
                 </div>
               </main>
               <aside className="col-lg-3 col-12">
-                <div className="card mb-3">
-                  <div className="card-body">
-                    <form>
-                      <div className="form-group">
-                        <label>Have coupon?</label>
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className="form-control"
-                            name=""
-                            placeholder="Coupon code"
-                          />
-                          <span className="input-group-append">
-                            <button className="btn btn-primary">Apply</button>
-                          </span>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
                 <div className="card">
                   <div className="card-body">
                     <dl className="dlist-align">
                       <dt>Total price:</dt>
-                      <dd className="text-right">USD 568</dd>
-                    </dl>
-                    <dl className="dlist-align">
-                      <dt>Discount:</dt>
-                      <dd className="text-right">USD 658</dd>
+                      <dd className="text-right">
+                        <CurrencyFormat
+                          value={totalPrice}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={""}
+                          className={"me-2"}
+                        />
+                        VND
+                      </dd>
                     </dl>
                     <dl className="dlist-align">
                       <dt>Total:</dt>
                       <dd className="text-right  h5">
-                        <strong>$1,650</strong>
+                        <strong>
+                          <CurrencyFormat
+                            value={totalPrice}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={""}
+                            className={"me-2"}
+                          />
+                          VND
+                        </strong>
                       </dd>
                     </dl>
                     <hr />

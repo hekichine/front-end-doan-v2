@@ -12,7 +12,7 @@ const AccountManager = () => {
   const [page, setPage] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(15);
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
@@ -33,6 +33,7 @@ const AccountManager = () => {
       if (data && data.data.error !== "0") {
         setUser(data.data.rows);
         setPage(data.data.pageCount);
+        console.log(data.data.rows);
         setTimeout(() => {
           setLoading(false);
         }, 500);

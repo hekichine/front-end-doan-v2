@@ -6,6 +6,7 @@ import "./Product.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import CurrencyFormat from "react-currency-format";
 
 const Product = (props) => {
   const dispatch = useDispatch();
@@ -32,6 +33,17 @@ const Product = (props) => {
       count: 1,
     };
     dispatch(addCart(action));
+    toast.success("Add to cart success!", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    return;
   };
 
   return (
@@ -79,14 +91,41 @@ const Product = (props) => {
             <p className="ms-product-price">
               {product?.sale === 0 ? (
                 <>
-                  <span className="ms-price">{product?.price}$</span>
+                  <span className="ms-price">
+                    <CurrencyFormat
+                      value={product?.price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={""}
+                      className={"me-1"}
+                    />
+                    đ
+                  </span>
                 </>
               ) : (
                 <>
                   <span className="ms-price">
-                    {product?.price - (product?.price * product?.sale) / 100}$
+                    <CurrencyFormat
+                      value={
+                        product?.price - (product?.price * product?.sale) / 100
+                      }
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={""}
+                      className={"me-1"}
+                    />
+                    đ
                   </span>
-                  <span className="ms-main-price">{product?.price}$</span>
+                  <span className="ms-main-price">
+                    <CurrencyFormat
+                      value={product?.price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={""}
+                      className={"me-1"}
+                    />
+                    đ
+                  </span>
                 </>
               )}
             </p>

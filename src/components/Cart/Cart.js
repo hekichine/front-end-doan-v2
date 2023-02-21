@@ -92,7 +92,7 @@ const Cart = () => {
                         VND
                       </dd>
                     </dl>
-                    <dl className="dlist-align">
+                    <dl className="dlist-align d-none">
                       <dt>Total:</dt>
                       <dd className="text-right  h5">
                         <strong>

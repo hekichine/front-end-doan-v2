@@ -6,6 +6,8 @@ import "./productdetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
+import Comment from "../Comment/Comment";
+import CurrencyFormat from "react-currency-format";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -73,6 +75,17 @@ const ProductDetail = () => {
       count: count,
     };
     dispatch(addCart(action));
+    toast.success("Add to cart success!", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    return;
   };
   useEffect(() => {
     getSingleProduct(id);
@@ -115,8 +128,16 @@ const ProductDetail = () => {
                         </h5>
                         <div className="price d-flex flex-row align-items-center">
                           <span className="act-price me-3">
-                            {product?.price -
-                              (product?.price * product?.sale) / 100}
+                            <CurrencyFormat
+                              value={
+                                product?.price -
+                                (product?.price * product?.sale) / 100
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={""}
+                              className={"me-1"}
+                            />
                             đ
                           </span>
                           {product?.sale === 0 ? (
@@ -125,9 +146,19 @@ const ProductDetail = () => {
                             <>
                               <div>
                                 <small className="dis-price me-1">
-                                  {product?.price}đ
+                                  <CurrencyFormat
+                                    value={product?.price}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={""}
+                                    className={"me-1"}
+                                  />
+                                  đ
                                 </small>
-                                <span className="sale">
+                                <span
+                                  className="sale"
+                                  style={{ color: "red", fontWeight: "700" }}
+                                >
                                   {product?.sale}% OFF
                                 </span>
                               </div>
@@ -183,6 +214,7 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
+        <Comment id={id} />
       </section>
     </>
   );

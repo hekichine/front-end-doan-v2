@@ -7,6 +7,7 @@ import { addProduct } from "../../../../redux/productSlice";
 
 import "../../User/userTable.css";
 import { useDispatch } from "react-redux";
+import CurrencyFormat from "react-currency-format";
 
 const ProductTable = (props) => {
   const dispatch = useDispatch();
@@ -95,7 +96,16 @@ const ProductTable = (props) => {
                   <tr key={item.id}>
                     <td>{index + 1}</td>
                     <td>{item.product_name}</td>
-                    <td>{item.price}đ</td>
+                    <td>
+                      <CurrencyFormat
+                        value={item.price}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={""}
+                        className={"me-1"}
+                      />
+                      đ
+                    </td>
                     <td className="product-description">
                       <div className="ms-des" style={{ maxWidth: "700px" }}>
                         {item.description}
@@ -110,7 +120,15 @@ const ProductTable = (props) => {
                         }}
                       />
                     </td>
-                    <td>{item.quantity}</td>
+                    <td>
+                      <CurrencyFormat
+                        value={item.quantity}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={""}
+                        className={"me-1"}
+                      />
+                    </td>
                     <td>{item.language}</td>
                     <td>{item.publisher}</td>
                     <td>

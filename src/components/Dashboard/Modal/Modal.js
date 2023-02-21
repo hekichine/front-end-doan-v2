@@ -134,7 +134,8 @@ const Modal = (props) => {
                 className="form-control my-1"
                 id="username"
                 value={username}
-                readOnly="true"
+                readOnly
+                disabled
               />
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
@@ -203,9 +204,6 @@ const Modal = (props) => {
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
               >
-                <option value="0" selected>
-                  ---
-                </option>
                 <option value="1">Admin</option>
                 <option value="2">Member</option>
               </select>

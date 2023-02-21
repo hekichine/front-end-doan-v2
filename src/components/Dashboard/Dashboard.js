@@ -4,6 +4,8 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import Social from "../Header/Social";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from "react-icons/ai";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 const Dashboard = () => {
   const [toggleNav, setToggleNav] = useState(false);
@@ -41,7 +43,7 @@ const Dashboard = () => {
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
           {/* <!-- Navbar Brand--> */}
           <Link className="navbar-brand ps-3" to="">
-            Minh Sang Store
+            MINH SANG STORE
           </Link>
           {/* <!-- Sidebar Toggle--> */}
           <button
@@ -49,7 +51,15 @@ const Dashboard = () => {
             className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
             id="sidebarToggle"
           >
-            <i className="fas fa-bars"></i>
+            {toggleNav ? (
+              <>
+                <AiOutlineMenuUnfold size={30} />
+              </>
+            ) : (
+              <>
+                <AiOutlineMenuFold size={30} />
+              </>
+            )}
           </button>
 
           {/* <!-- Navbar--> */}
@@ -94,7 +104,7 @@ const Dashboard = () => {
                     </div>
                     Products
                     <div className="sb-sidenav-collapse-arrow">
-                      <i className="fas fa-angle-down"></i>
+                      <RiArrowDownSLine size={20} color={"#fff"} />
                     </div>
                   </Link>
                   <div
@@ -125,7 +135,7 @@ const Dashboard = () => {
                     </div>
                     User
                     <div className="sb-sidenav-collapse-arrow">
-                      <i className="fas fa-angle-down"></i>
+                      <RiArrowDownSLine size={20} color={"#fff"} />
                     </div>
                   </Link>
                   <div

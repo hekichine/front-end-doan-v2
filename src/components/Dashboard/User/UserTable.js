@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { toast } from "react-toastify";
-
 import { Link } from "react-router-dom";
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
 import "./userTable.css";
 
@@ -77,7 +77,7 @@ const UserTable = (props) => {
               })
               .map((item, index) => (
                 <>
-                  <tr key={item}>
+                  <tr key={item.id}>
                     <td>{index + 1}</td>
                     <td>
                       {" "}
@@ -105,7 +105,7 @@ const UserTable = (props) => {
                             data-toggle="tooltip"
                             data-original-title="Edit"
                           >
-                            <i className="fa-solid fa-pen-to-square"></i>
+                            <AiOutlineEdit />
                           </Link>
                         </>
                       ) : (
@@ -117,7 +117,7 @@ const UserTable = (props) => {
                             data-toggle="tooltip"
                             data-original-title="Edit"
                           >
-                            <i className="fa-solid fa-pen-to-square"></i>
+                            <AiOutlineEdit />
                           </Link>
                           <button
                             className="delete"
@@ -126,7 +126,7 @@ const UserTable = (props) => {
                             data-original-title="Delete"
                             onClick={() => handleDelete(item)}
                           >
-                            <i className="fa-regular fa-trash-can"></i>
+                            <AiOutlineDelete />
                           </button>
                         </>
                       )}

@@ -1,4 +1,7 @@
 import React from "react";
+import { AiOutlineInstagram } from "react-icons/ai";
+import { TbBrandTelegram } from "react-icons/tb";
+import { SlSocialFacebook } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import "./Social.css";
 const Social = (props) => {
@@ -12,20 +15,20 @@ const Social = (props) => {
             target={"_blank"}
             className="d-flex align-items-center justify-content-center"
           >
-            <i className="fa-brands fa-facebook"></i>
+            <SlSocialFacebook />
           </Link>
           <Link
             to=""
             className="d-flex align-items-center justify-content-center"
           >
-            <i className="fa-brands fa-twitter"></i>
+            <TbBrandTelegram />
           </Link>
           <Link
             to="https://instagram.com/luv.you.baka?igshid=YzgyMTM2MGM="
             target={"_blank"}
             className="d-flex align-items-center justify-content-center"
           >
-            <i className="fa-brands fa-instagram"></i>
+            <AiOutlineInstagram />
           </Link>
         </p>
       </div>

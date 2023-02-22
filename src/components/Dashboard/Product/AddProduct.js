@@ -50,7 +50,7 @@ const AddProduct = (props) => {
     if (result.data.error === 0) {
       toast.success("🦄 Wow add product successfully!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -60,9 +60,9 @@ const AddProduct = (props) => {
       });
       return;
     }
-    toast.error("🦄 Add product failed!", {
+    toast.error(result?.data?.message, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

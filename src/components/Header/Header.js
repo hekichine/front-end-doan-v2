@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
-import { AiOutlineUser } from "react-icons/ai";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import {
+  AiOutlineMenuFold,
+  AiOutlineMenuUnfold,
+  AiOutlineUser,
+} from "react-icons/ai";
 import { BsBoxArrowRight } from "react-icons/bs";
 
 import "./Header.css";
@@ -10,6 +15,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const cart = useSelector((state) => state.cart);
   let user = JSON.parse(localStorage.getItem("user"));
+  const [toggleNav, setToggleNav] = useState();
 
   return (
     <>
@@ -32,15 +38,15 @@ const Header = () => {
               <button
                 className="navbar-toggler collapsed "
                 type="button"
-                data-toggle="collapse"
-                data-target="#ftco-nav"
+                data-bs-toggle="collapse"
+                data-bs-target="#ftco-nav"
                 aria-controls="ftco-nav"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
-                <span className="fa fa-bars"></span> Menu
+                <AiOutlineMenuUnfold size={30} />
               </button>
-              <div className="navbar-collapse collapse" id="ftco-nav">
+              <div className="navbar-collapse collapse colgate" id="ftco-nav">
                 <ul className="navbar-nav ml-auto mr-md-3 align-items-center">
                   <li className="nav-item">
                     <NavLink to="/" className="nav-link">
@@ -57,9 +63,6 @@ const Header = () => {
                       Work
                     </NavLink>
                   </li>
-                  {/* <li className="nav-item">
-                    <span className="nav-link">/</span>
-                  </li> */}
                   {user ? (
                     <>
                       <li className="ms-pr ms-account-hover">
@@ -68,18 +71,24 @@ const Header = () => {
                           {user.role === 1 ? (
                             <>
                               <Link className="nav-link" to={"/dashboard"}>
-                                <AiOutlineUser /> Admin
+                                <span>
+                                  <MdOutlineAdminPanelSettings /> Admin
+                                </span>
                               </Link>
                             </>
                           ) : (
                             <></>
                           )}
-                          <Link className="nav-link" to={""}>
-                            <AiOutlineUser /> Account
+                          <Link className="nav-link" to={`/account/${user.id}`}>
+                            <span>
+                              <AiOutlineUser /> Account
+                            </span>
                           </Link>
 
                           <Link className="nav-link" to={"/signout"}>
-                            <BsBoxArrowRight /> Sign out
+                            <span>
+                              <BsBoxArrowRight /> Sign out
+                            </span>
                           </Link>
                         </div>
                       </li>

@@ -17,6 +17,7 @@ const ShopPage = () => {
   const [heading, setHeading] = useState("");
   const [fintProduct, setFindProduct] = useState(0);
   const [err, setErr] = useState(false);
+  const [filterPrice, setFilterPrice] = useState(0);
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
@@ -102,28 +103,11 @@ const ShopPage = () => {
                         <div className="card-body">
                           <ul className="list-menu">
                             <li>
-                              <Link to={""}>Electronics </Link>
-                            </li>
-                            <li>
-                              <Link to={""}>Accessories </Link>
-                            </li>
-                            <li>
-                              <Link to={""}>Home items </Link>
-                            </li>
-                            <li>
-                              <Link to={""}>Men's clothing </Link>
-                            </li>
-                            <li>
-                              <Link to={""}>Interior items </Link>
-                            </li>
-                            <li>
-                              <Link to={""}>Magazines </Link>
-                            </li>
-                            <li>
-                              <Link to={""}>Category name </Link>
-                            </li>
-                            <li>
-                              <Link to={""}>Home items </Link>
+                              <button
+                                onClick={() => setFilterPrice(300 * 1000)}
+                              >
+                                Price &gt; 300k
+                              </button>
                             </li>
                           </ul>
                         </div>
@@ -293,7 +277,9 @@ const ShopPage = () => {
                     ) : (
                       data &&
                       data?.length > 0 &&
-                      data?.map((item, index) => <Product data={item} />)
+                      data
+                        ?.filter((product) => product?.price >= filterPrice)
+                        ?.map((item, index) => <Product data={item} />)
                     )}
                   </div>
 

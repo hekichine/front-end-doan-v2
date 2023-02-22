@@ -11,13 +11,13 @@ import PageContent from "./components/HomePage/PageContent";
 import NotFound from "./components/404NotFound/NotFound";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Register from "./components/Login/Register";
-import AccountManager from "./components/Dashboard/User/AccountManager";
 import { ToastContainer } from "react-toastify";
 import Logout from "./components/Logout/Logout";
 import Modal from "./components/Dashboard/Modal/Modal";
 import ProductManager from "./components/Dashboard/Product/ProductManager/ProductManager";
 import UserContent from "./components/Dashboard/User/UserContent";
 import ModalProduct from "./components/Dashboard/Modal/ModalProduct";
+import Account from "./components/Account/Account";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />}>
           <Route path="" element={<PageContent />} />
-          <Route path="account" element={<AccountManager />} />
+          <Route path="account/:uid" element={<Account />} />
           <Route path="cart" element={<Cart />} />
           <Route path="shop" element={<ShopPage />} />
           <Route path="product/:id" element={<ProductDetail />} />

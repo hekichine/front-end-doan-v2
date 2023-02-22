@@ -164,6 +164,8 @@
 }
 .ms-header .ftco-navbar-light .navbar-toggler:focus {
   outline: none !important;
+  box-shadow: none;
+  border: none;
 }
 .ms-header .ms-account-hover {
   padding: 15px 20px;
@@ -197,10 +199,52 @@
 .ms-header .ms-cart-control:hover > * {
   color: #fc7fb2;
 }
-
+/* .ms-header .colgate {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  height: 0;
+  transition: all 0.45s linear;
+}
+.ms-header .colgate.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  height: fit-content;
+} */
+.ms-header .ms-account a span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 60%;
+  margin: 0 auto;
+}
 @media (max-width: 991.98px) {
   .ms-header .ftco-navbar-light .navbar-toggler {
     order: -1;
+  }
+  .ms-header .ms-account {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: none;
+    position: relative;
+    display: flex;
+    margin: 10px auto;
+  }
+  .ms-header .ms-account a {
+    display: inline-flex;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 25px;
+    border: 1px solid #1c1c1c;
+  }
+  .ms-header .ms-account a svg {
+    margin-right: 10px;
+  }
+  .ms-header .ms-account-hover {
+    padding: 0;
   }
 }
 @media screen and (min-width: 992px) {
@@ -214,6 +258,11 @@
 
   .ms-header .ms-cart-control {
     order: 6;
+  }
+}
+@media screen and (max-width: 550px) {
+  .ms-header .ms-account {
+    flex-direction: column;
   }
 }
 @media screen and (max-width: 424px) {

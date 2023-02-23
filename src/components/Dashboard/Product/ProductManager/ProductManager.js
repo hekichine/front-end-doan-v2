@@ -12,6 +12,7 @@ const ProductManager = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState();
+  const [limit, setLimit] = useState(10);
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
@@ -21,21 +22,21 @@ const ProductManager = () => {
 
   useEffect(() => {
     setLoading(true);
-    let callDataCategory = async () => {
+    let callDataCategory = async (currentPage, limit) => {
       let result = await axios.get(
-        "http://localhost:8080/api/categories/getall"
+        `http://localhost:8080/api/categories/getall?page=${currentPage}&limit=${limit}`
       );
       if (result) {
         setCategories(result.data.rows);
       }
     };
 
-    let callDataProduct = async (currentPage) => {
+    let callDataProduct = async (currentPage, limit) => {
       let data = await axios.get(
-        `http://localhost:8080/api/product/getall?page=${currentPage}&limit=5`
+        `http://localhost:8080/api/product/getall?page=${currentPage}&limit=${limit}`
       );
 
-      if (data && data.data.error !== "0") {
+      if (data && data.data.error === 0) {
         setProduct(data.data.rows);
         setPage(data.data.pageCount);
         setTimeout(() => {
@@ -43,12 +44,12 @@ const ProductManager = () => {
         }, 500);
       }
     };
-    callDataProduct(currentPage);
-    callDataCategory();
+    callDataProduct(currentPage, limit);
+    callDataCategory(currentPage, limit);
     return () => {
       clearTimeout();
     };
-  }, [currentPage]);
+  }, [currentPage, limit]);
   return (
     <>
       <div className="ms-product-manager">

@@ -15,77 +15,24 @@ const ModalProduct = (props) => {
   const navigation = useNavigate();
 
   const [id, setId] = useState(product?.id);
-  const [username, setProductname] = useState(product?.username);
-  const [avt, setAvt] = useState(product?.user_image);
-  const [password, setPassword] = useState(product?.password);
-  const [fullname, setFullname] = useState(product?.fullname);
-  const [email, setEmail] = useState(product?.email);
-  const [phone, setPhone] = useState(product?.phone);
-  const [role, setRole] = useState(product?.role);
+  const [productname, setProductname] = useState(product?.product_name);
+  const [price, setPrice] = useState(product?.price);
+  const [sale, setSale] = useState(product?.sale);
+  const [des, setDes] = useState(product?.description);
+  const [quantity, setQuantity] = useState(product?.quantity);
+  const [language, setLanguage] = useState(product?.language);
+  const [publisher, setPublisher] = useState(product?.publisher);
+  const [prstatus, setStatus] = useState(product?.status);
 
   const handleCancel = () => {
     navigation("/dashboard/product");
   };
+
   const handleSubmit = async () => {
-    if (email && password) {
-      if (password.length <= 5) {
-        toast.error("Password is less 6 character", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        return;
-      }
-      let formData = new FormData();
-      formData.append("id", id);
-      formData.append("username", username);
-      formData.append("user_image", avt);
-      formData.append("password", password);
-      formData.append("fullname", fullname);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      formData.append("role", role);
-      // let userUpdate = {
-      //   id: product?.id,
-      //   username: product.username,
-      //   user_avt: avt,
-      //   password: password,
-      //   fullname: fullname,
-      //   email: email,
-      //   address: address,
-      //   phone: phone,
-      //   role: role,
-      // };
-      // console.log(formData);
-      // return;
-      let data = await axios.post(
-        "http://localhost:8080/api/product/update",
-        formData
-      );
-
-      if (data.data.error === 0) {
-        toast.success(`${data.data.message}`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        navigation("/dashboard/product");
-
-        return;
-      }
-      toast.error(`${data.data.message}`, {
+    if (sale < 0 || sale > 100) {
+      toast.warn("Sale invalid. Must be 0 - 100", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -93,12 +40,56 @@ const ModalProduct = (props) => {
         progress: undefined,
         theme: "light",
       });
+      return;
+    }
+    if (!quantity) {
+      toast.warn("Quantity invalid. Must be number", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+    let product = {
+      id: id,
+      product_name: productname,
+      price: price,
+      sale: sale,
+      description: des,
+      quantity: quantity,
+      language: language,
+      publisher: publisher,
+      status: prstatus,
+    };
+
+    let data = await axios.post(
+      "http://localhost:8080/api/product/update",
+      product
+    );
+
+    if (data.data.error === 0) {
+      toast.success(`${data.data.message}`, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      navigation("/dashboard/product");
 
       return;
     }
-    toast.error("Email or password is valid", {
+    toast.error(`${data.data.message}`, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -115,86 +106,88 @@ const ModalProduct = (props) => {
           <div className="ms-section-heading my-3">Update product</div>
           <div className="row gx-3 gy-3">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="username">product name</label>
+              <label htmlFor="username">Product name</label>
               <input
                 type="text"
                 className="form-control my-1"
                 id="username"
-                value={username}
-                readOnly="true"
+                value={productname}
+                onChange={(e) => setProductname(e.target.value)}
               />
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="fullname">Full name</label>
+              <label htmlFor="fullname">Price</label>
               <input
                 type="text"
                 className="form-control my-1"
                 id="fullname"
-                value={fullname}
-                placeholder={fullname}
-                onChange={(e) => setFullname(e.target.value)}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Sale(%)</label>
               <input
-                type="password"
+                type="number"
                 className="form-control my-1"
                 id="password"
-                value={password}
-                placeholder={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={sale}
+                onChange={(e) => setSale(e.target.value)}
               />
             </div>
 
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
+              <label htmlFor="email">Description</label>
+              <textarea
+                type="text"
                 className="form-control my-1"
                 id="email"
-                required
-                value={email}
-                placeholder={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={des}
+                onChange={(e) => setDes(e.target.value)}
+                style={{ height: "200px" }}
               />
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="phone">Quantity</label>
               <input
-                type="tel"
+                type="number"
                 className="form-control my-1"
                 id="phone"
-                value={phone}
-                required
-                placeholder={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
               />
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="avt">Avatar</label>
+              <label htmlFor="avt">Language</label>
               <input
-                type="file"
+                type="text"
                 className="form-control my-1"
                 id="avt"
-                onChange={(e) => setAvt(e.target.files[0])}
-                accept={"image/jpg image/jpeg image/png"}
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
               />
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
-              <label htmlFor="role">Role</label>
+              <label htmlFor="avt1">Publisher</label>
+              <input
+                type="text"
+                className="form-control my-1"
+                id="avt1"
+                value={publisher}
+                onChange={(e) => setPublisher(e.target.value)}
+              />
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-start ">
+              <label htmlFor="role">Status</label>
               <select
                 name="role"
                 id="role"
                 className="form-select my-1"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
+                value={prstatus}
+                onChange={(e) => setStatus(e.target.value)}
               >
-                <option value="0" selected>
-                  ---
-                </option>
-                <option value="1">Admin</option>
-                <option value="2">Member</option>
+                <option value="1">Enable</option>
+                <option value="2">Disable</option>
               </select>
             </div>
             <div className="col-12">

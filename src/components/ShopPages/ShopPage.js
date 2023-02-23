@@ -29,7 +29,7 @@ const ShopPage = () => {
       setLoading(true);
       setErr(false);
       let result = await axios.get(
-        `http://localhost:8080/api/product/getall?page=${currentPage}&limit=12`
+        `http://localhost:8080/api/product/getallHome?page=${currentPage}&limit=12`
       );
 
       if (result.data.error === 0) {

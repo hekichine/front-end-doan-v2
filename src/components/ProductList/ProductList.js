@@ -1,24 +1,40 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import Product from "./Product";
 
-import data from "./dataProduct";
+// import data from "./dataProduct";
 
 const ProductList = () => {
+  const [product, setProduct] = useState();
+  useEffect(() => {
+    let fetchData = async () => {
+      let result = await axios.get(
+        "http://localhost:8080/api/product/getproduct?page=0&limit=20"
+      );
+      if (result?.data?.error === 0) {
+        setProduct(result?.data?.sell);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <div className="ms-product-list" style={{ margin: "0 0 40px 0" }}>
         <div className="container">
           <h3 className="ms-section-heading">Best Seller</h3>
           <h4 className="ms-section-subheading">
-            Mirum est notare quam littera gothica, quam nunc putamus parum
-            claram anteposuerit litterarum formas.
+            It is surprising to note how Gothic literature, which we consider
+            less obvious today, predates alphabetic forms.
           </h4>
           <div className="row gx-4 gy-3">
-            {data &&
-              data.length > 0 &&
-              data
-                .slice(0, 8)
-                .map((item, index) => (
+            {product?.length > 0 ? "" : <div className="m-auto">None sell</div>}
+            {product &&
+              product?.length > 0 &&
+              product
+                ?.slice(0, 8)
+                ?.map((item, index) => (
                   <Product data={item} key={index} incart={false} />
                 ))}
           </div>

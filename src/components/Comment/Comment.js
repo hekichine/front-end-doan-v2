@@ -44,7 +44,6 @@ const Comment = (props) => {
       `http://localhost:8080/api/product/comment/add`,
       comment
     );
-    console.log(result.data);
     if (result && result.data.error === 0) {
       toast.success("Comment succes", {
         position: "top-right",
@@ -58,7 +57,6 @@ const Comment = (props) => {
       });
       setContent("");
       setReload((pre) => pre + 1);
-
       return;
     } else {
       toast.error(result.data.message, {

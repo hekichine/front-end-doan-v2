@@ -1,11 +1,16 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeCart } from "../../redux/cartSlice";
 
 const CartItem = (props) => {
   let product = props.product;
   const [count, setCount] = useState(product?.count);
-
+  const dispath = useDispatch();
+  const handleRemoveCart = (product) => {
+    dispath(removeCart(product));
+  };
   return (
     <>
       <tr key={product.id}>
@@ -51,7 +56,11 @@ const CartItem = (props) => {
           </div>
         </td>
         <td className="text-right">
-          <button className="btn btn-light" title="Remove product">
+          <button
+            className="btn btn-light"
+            title="Remove product"
+            onClick={() => handleRemoveCart(product)}
+          >
             Remove
           </button>
         </td>

@@ -9,6 +9,8 @@ import "../../User/userTable.css";
 import { useDispatch } from "react-redux";
 import CurrencyFormat from "react-currency-format";
 
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+
 const ProductTable = (props) => {
   const dispatch = useDispatch();
   let dataProduct = props.dataProduct;
@@ -61,8 +63,10 @@ const ProductTable = (props) => {
             <th>Description</th>
             <th>Product image</th>
             <th>Quantity</th>
+            <th>Sale</th>
             <th>Language</th>
             <th>Publisher</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
@@ -129,8 +133,10 @@ const ProductTable = (props) => {
                         className={"me-1"}
                       />
                     </td>
+                    <td>{item.sale} %</td>
                     <td>{item.language}</td>
                     <td>{item.publisher}</td>
+                    <td>{item.status === 1 ? <>Enable</> : <>Disable</>}</td>
                     <td>
                       <div className="ms-action" style={{ minWidth: "50px" }}>
                         <Link
@@ -141,7 +147,7 @@ const ProductTable = (props) => {
                           data-original-title="Edit"
                           onClick={() => handleEdit(item)}
                         >
-                          <i className="fa-solid fa-pen-to-square"></i>
+                          <AiOutlineEdit />
                         </Link>
                         <button
                           disabled
@@ -151,7 +157,7 @@ const ProductTable = (props) => {
                           data-original-title="Delete"
                           // onClick={() => handleDelete(item)}
                         >
-                          <i className="fa-regular fa-trash-can"></i>
+                          <AiOutlineDelete />
                         </button>
                       </div>
                     </td>

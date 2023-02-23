@@ -39,11 +39,20 @@ const CountUser = () => {
       let result = await axios.get(
         `http://localhost:8080/api/product/comment?page=1&limit=3`
       );
-      console.log(result.data);
+
       if (result.data.error === 0) {
         setComment(result.data?.dataCount);
       }
     };
+    let fetchCollection = async () => {
+      let result = await axios.get(
+        "http://localhost:8080/api/collection/getall"
+      );
+      if (result?.data?.error === 0) {
+        setCollection(result?.data?.count);
+      }
+    };
+    // fetchCollection();
     fetchProduct();
     fetchUser();
     fetchComment();

@@ -18,6 +18,7 @@ import ProductManager from "./components/Dashboard/Product/ProductManager/Produc
 import UserContent from "./components/Dashboard/User/UserContent";
 import ModalProduct from "./components/Dashboard/Modal/ModalProduct";
 import Account from "./components/Account/Account";
+import Order from "./components/Dashboard/Order/Order";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="account/:id" element={<Modal />} />
           <Route path="product" element={<ProductManager />} />
           <Route path="product/:id" element={<ModalProduct />} />
+          <Route path="order" element={<Order />} />
         </Route>
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />

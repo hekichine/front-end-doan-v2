@@ -117,8 +117,8 @@ const Dashboard = () => {
                       <Link className="nav-link" to="/dashboard/product">
                         Products
                       </Link>
-                      <Link className="nav-link" to="/dashboard/collection">
-                        Collection
+                      <Link className="nav-link" to="/dashboard/order">
+                        Order
                       </Link>
                     </nav>
                   </div>

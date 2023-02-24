@@ -19,6 +19,7 @@ import UserContent from "./components/Dashboard/User/UserContent";
 import ModalProduct from "./components/Dashboard/Modal/ModalProduct";
 import Account from "./components/Account/Account";
 import Order from "./components/Dashboard/Order/Order";
+import Category from "./components/Dashboard/Category/Category";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="product" element={<ProductManager />} />
           <Route path="product/:id" element={<ModalProduct />} />
           <Route path="order" element={<Order />} />
+          <Route path="category" element={<Category />} />
         </Route>
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />

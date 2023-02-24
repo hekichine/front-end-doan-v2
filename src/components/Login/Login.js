@@ -30,7 +30,7 @@ const Login = () => {
       if (data.data.error === 1) {
         toast.error(`${data.data.message}`, {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -42,7 +42,7 @@ const Login = () => {
       }
       toast.success(`${data.data.message}`, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -58,7 +58,7 @@ const Login = () => {
         } else {
           navigation("/");
         }
-      }, 3000);
+      }, 1000);
     }
   };
 

@@ -28,6 +28,7 @@ const SaleProduct = () => {
               products?.length > 0 &&
               products
                 ?.slice(0, 8)
+                ?.sort((a, b) => b.sale - a.sale)
                 ?.map((item, index) => <Product data={item} key={index} />)}
           </div>
         </div>

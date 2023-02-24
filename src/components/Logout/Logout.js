@@ -11,7 +11,7 @@ const Logout = () => {
   useEffect(() => {
     localStorage.removeItem("user");
     dispatch(removeCart());
-    setTimeout(() => {
+    let signout = setTimeout(() => {
       toast('🦄 Sign out success! It"s so easy', {
         position: "top-right",
         autoClose: 1000,
@@ -26,7 +26,7 @@ const Logout = () => {
     }, 1000);
 
     return () => {
-      clearTimeout();
+      clearTimeout(signout);
     };
   }, []);
 

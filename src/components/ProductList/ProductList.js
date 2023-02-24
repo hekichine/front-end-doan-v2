@@ -34,6 +34,7 @@ const ProductList = () => {
               product?.length > 0 &&
               product
                 ?.slice(0, 8)
+                ?.sort((a, b) => b.sell - a.sell)
                 ?.map((item, index) => (
                   <Product data={item} key={index} incart={false} />
                 ))}

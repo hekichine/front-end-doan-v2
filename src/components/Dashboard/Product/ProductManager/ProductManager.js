@@ -13,6 +13,7 @@ const ProductManager = () => {
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState();
   const [limit, setLimit] = useState(10);
+  const [load, setLoad] = useState(0);
 
   const handlePageClick = (dt) => {
     let numpage = dt.selected + 1;
@@ -49,11 +50,11 @@ const ProductManager = () => {
     return () => {
       clearTimeout();
     };
-  }, [currentPage, limit]);
+  }, [currentPage, limit, load]);
   return (
     <>
       <div className="ms-product-manager">
-        <AddProduct categories={categories} />
+        <AddProduct categories={categories} setLoad={setLoad} />
         <div className="container-fluid">
           <div className="row">
             <div className="card mb-4">

@@ -14,7 +14,18 @@ const AddProduct = (props) => {
   const [images, setImages] = useState();
 
   let list_cate = props?.categories;
+  let setLoad = props?.setLoad;
 
+  const reset = () => {
+    setProductname();
+    setPrice();
+    setSale();
+    setQuantity();
+    setDescription();
+    setLanguage();
+    setPublisher();
+    setImages();
+  };
   const handleAdd = async () => {
     if (!images) {
       toast.error("Image not null", {
@@ -47,6 +58,7 @@ const AddProduct = (props) => {
       "http://localhost:8080/api/product/add",
       product
     );
+    console.log(result);
     if (result.data.error === 0) {
       toast.success("🦄 Wow add product successfully!", {
         position: "top-right",
@@ -58,6 +70,8 @@ const AddProduct = (props) => {
         progress: undefined,
         theme: "light",
       });
+      setLoad((pre) => pre + 1);
+      // reset();
       return;
     }
     toast.error(result?.data?.message, {
@@ -167,12 +181,12 @@ const AddProduct = (props) => {
                         <input
                           type="text"
                           className="form-control"
-                          id="floatingInput"
+                          id="languagefloarinput"
                           placeholder="name@example.com"
                           value={language}
                           onChange={(e) => setLanguage(e.target.value)}
                         />
-                        <label htmlFor="floatingInput">Language</label>
+                        <label htmlFor="languagefloarinput">Language</label>
                       </div>
                     </div>
                     <div className="mb-3 col-12 col-md-6">

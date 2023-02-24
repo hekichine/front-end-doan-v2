@@ -102,7 +102,7 @@ const Dashboard = () => {
                     <div className="sb-nav-link-icon">
                       <i className="fas fa-columns"></i>
                     </div>
-                    Products
+                    General
                     <div className="sb-sidenav-collapse-arrow">
                       <RiArrowDownSLine size={20} color={"#fff"} />
                     </div>
@@ -118,7 +118,11 @@ const Dashboard = () => {
                         Products
                       </Link>
                       <Link className="nav-link" to="/dashboard/order">
-                        Order
+                        Orders
+                      </Link>
+
+                      <Link className="nav-link" to="/dashboard/category">
+                        Categories
                       </Link>
                     </nav>
                   </div>

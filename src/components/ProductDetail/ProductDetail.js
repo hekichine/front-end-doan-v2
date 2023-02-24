@@ -167,6 +167,10 @@ const ProductDetail = () => {
                         </div>
                       </div>
                       <p className="about">{product?.description}</p>
+                      <p className="pr-detail-publisher my-2">
+                        <span className="me-2">Publisher:</span>
+                        {product?.publisher || "Chưa cập nhật"}
+                      </p>
                       <div className="ms-stock">
                         <span className="me-1">Status:</span>
                         {product?.status === 1 ? (
@@ -179,6 +183,7 @@ const ProductDetail = () => {
                           <span className="sold-out">SoldOut</span>
                         )}
                       </div>
+
                       <div className="cart mt-4 align-items-center d-flex">
                         <div className="ms-form-count me-3">
                           <button

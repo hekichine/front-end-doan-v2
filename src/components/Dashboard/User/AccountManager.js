@@ -74,7 +74,7 @@ const AccountManager = () => {
                   search={search}
                 />
               )}
-              <nav className="mx-3 my-2 d-flex justify-content-between">
+              <nav className="mx-3 my-2 d-flex justify-content-between flex-wrap">
                 <ReactPaginate
                   previousLabel={"Previous"}
                   nextLabel={"Next"}

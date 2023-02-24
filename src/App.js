@@ -20,6 +20,7 @@ import ModalProduct from "./components/Dashboard/Modal/ModalProduct";
 import Account from "./components/Account/Account";
 import Order from "./components/Dashboard/Order/Order";
 import Category from "./components/Dashboard/Category/Category";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="account/:uid" element={<Account />} />
           <Route path="cart" element={<Cart />} />
           <Route path="shop" element={<ShopPage />} />
+          <Route path="checkout" element={<Checkout />} />
           <Route path="product/:id" element={<ProductDetail />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>

@@ -114,8 +114,10 @@ const Cart = () => {
                         height="26"
                       />
                     </p>
-                    <Link to="#" className="btn btn-primary float-md-right">
-                      {" "}
+                    <Link
+                      to="/checkout"
+                      className="btn btn-primary float-md-right"
+                    >
                       Check out
                     </Link>
                   </div>

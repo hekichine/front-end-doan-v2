@@ -11,10 +11,11 @@ const ProductList = () => {
   useEffect(() => {
     let fetchData = async () => {
       let result = await axios.get(
-        "http://localhost:8080/api/product/getproduct?page=0&limit=20"
+        "http://localhost:8080/api/product/getall?page=0&limit=20"
       );
+      // console.log(result);
       if (result?.data?.error === 0) {
-        setProduct(result?.data?.sell);
+        setProduct(result?.data?.rows);
       }
     };
     fetchData();

@@ -9,6 +9,7 @@ import { useState } from "react";
 const Cart = () => {
   let cart = useSelector((state) => state.cart);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [reload, setLoad] = useState(1);
 
   useEffect(() => {
     let total = 0;
@@ -17,7 +18,7 @@ const Cart = () => {
         (total += item.count * (item.price - (item.price * item.sale) / 100))
     );
     setTotalPrice(total);
-  }, []);
+  }, [reload]);
   return (
     <>
       <div className="ms-cart">
@@ -47,7 +48,9 @@ const Cart = () => {
                     </thead>
                     <tbody>
                       {cart && cart?.length > 0 ? (
-                        cart?.map((item, index) => <CartItem product={item} />)
+                        cart?.map((item, index) => (
+                          <CartItem product={item} setLoad={setLoad} />
+                        ))
                       ) : (
                         <>
                           <tr>

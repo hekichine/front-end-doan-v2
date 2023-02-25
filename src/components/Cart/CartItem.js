@@ -1,15 +1,28 @@
 import React from "react";
 import { useState } from "react";
+import CurrencyFormat from "react-currency-format";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeCart } from "../../redux/cartSlice";
 
 const CartItem = (props) => {
   let product = props.product;
+  let setLoad = props?.setLoad;
   const [count, setCount] = useState(product?.count);
   const dispath = useDispatch();
   const handleRemoveCart = (product) => {
     dispath(removeCart(product));
+  };
+  const handleSetCount = (e) => {
+    if (e.target.value >= product?.quantity) {
+      setCount(product?.quantity);
+      setLoad((pre) => pre + 1);
+    } else if (e.target.value <= 0) {
+      setCount(1);
+    } else {
+      setCount(e.target.value);
+      setLoad((pre) => pre + 1);
+    }
   };
   return (
     <>
@@ -36,7 +49,7 @@ const CartItem = (props) => {
             type="number"
             className="form-control"
             value={count}
-            onChange={(e) => setCount(e.target.value)}
+            onChange={(e) => handleSetCount(e)}
           />
         </td>
         <td>
@@ -45,13 +58,27 @@ const CartItem = (props) => {
               className="text-muted me-1"
               style={{ textDecoration: "line-through" }}
             >
-              {product?.price}đ
+              <CurrencyFormat
+                value={product?.price}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={""}
+                className={"me-1"}
+              />
+              đ
             </small>
-            <span style={{ color: "red", fontWeight: "800" }}>
+            <span style={{ color: "red", fontWeight: "800", fontSize: "13px" }}>
               {product?.sale}% OFF
             </span>
             <var className="price">
-              {product?.price - (product?.price * product?.sale) / 100} đ
+              <CurrencyFormat
+                value={product?.price - (product?.price * product?.sale) / 100}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={""}
+                className={"me-1"}
+              />
+              đ
             </var>
           </div>
         </td>

@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import Product from "./Product";
+import Product from "../Product/Product";
 
 // import data from "./dataProduct";
 
@@ -37,7 +37,11 @@ const ProductList = () => {
                 ?.slice(0, 8)
                 ?.sort((a, b) => b.sell - a.sell)
                 ?.map((item, index) => (
-                  <Product data={item} key={index} incart={false} />
+                  <>
+                    <div className="col-6 col-md-4 col-lg-3">
+                      <Product data={item} key={index} />
+                    </div>
+                  </>
                 ))}
           </div>
         </div>

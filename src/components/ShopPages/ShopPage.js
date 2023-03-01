@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Product from "../ProductList/Product";
+import Product from "../Product/Product";
 import axios from "axios";
 import RingLoader from "react-spinners/RingLoader";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "./Product";
+import Product from "../Product/Product";
 
 import { useEffect } from "react";
 import { useState } from "react";
@@ -29,7 +29,13 @@ const SaleProduct = () => {
               products
                 ?.slice(0, 8)
                 ?.sort((a, b) => b.sale - a.sale)
-                ?.map((item, index) => <Product data={item} key={index} />)}
+                ?.map((item, index) => (
+                  <>
+                    <div className="col-6 col-md-4 col-lg-3">
+                      <Product data={item} key={index} />
+                    </div>
+                  </>
+                ))}
           </div>
         </div>
       </div>

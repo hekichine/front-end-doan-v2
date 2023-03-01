@@ -30,6 +30,9 @@ body {
 .w-100 {
   width: 100%;
 }
+.ratio-4x5 {
+  --bs-aspect-ratio: 80.75%;
+}
 a {
   text-decoration: none !important;
   color: #000;

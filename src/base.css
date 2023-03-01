@@ -1,7 +1,34 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+body {
+  font-family: var(--jost);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+  /* text-align: center; */
+  background-color: #fff;
+}
+:root {
+  --jost: "Jost", sans-serif;
+  --poppins: "Poppins", sans-serif;
+  --cormor: "Cormorant Garamond", serif;
+}
+
+.ms-pr {
+  position: relative;
+}
+.ms-po {
+  position: absolute;
+}
+.ms-oh {
+  overflow: hidden;
+}
+.w-100 {
+  width: 100%;
 }
 a {
   text-decoration: none !important;
@@ -17,10 +44,6 @@ ul,
 ol {
   list-style: none;
   padding: 0;
-}
-body {
-  font-size: 16px;
-  font-weight: 500;
 }
 
 @media screen and (min-width: 1025px) {

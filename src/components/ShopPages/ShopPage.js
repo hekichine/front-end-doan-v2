@@ -85,7 +85,7 @@ const ShopPage = () => {
 
                   <div
                     id="aside_filter"
-                    className="collapse card d-lg-block mb-5"
+                    className="collapse card d-lg-block d-none d-lg-none mb-5"
                   >
                     <article className="filter-group">
                       <header className="card-header">
@@ -157,7 +157,7 @@ const ShopPage = () => {
                           data-bs-toggle="collapse"
                           data-bs-target="#collapse_aside2"
                         >
-                          <i className="icon-control fa fa-chevron-down"></i>{" "}
+                          <i className="icon-control fa fa-chevron-down"></i>
                           Price
                         </Link>
                       </header>

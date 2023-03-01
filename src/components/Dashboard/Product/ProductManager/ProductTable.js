@@ -150,7 +150,7 @@ const ProductTable = (props) => {
                           <AiOutlineEdit />
                         </Link>
                         <button
-                          disabled
+                          // disabled
                           className="delete"
                           title=""
                           data-toggle="tooltip"

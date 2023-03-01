@@ -408,7 +408,7 @@
   justify-content: center;
   align-items: center;
   font-size: 30px;
-  padding: 20px;
+  border: 1px solid #686868;
 }
 .ms-overlay-mobile {
   top: 0;
@@ -424,11 +424,20 @@
 .ms-navigation ul li a .ms-btn-show-nav-active {
   transform: rotate(45deg);
 }
-
+.t4s-overlay-mobile {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.t4s-overlay-mobile.active {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
 @media screen and (max-width: 1365px) {
   .ms-header .ms-menu-mobile {
     position: fixed;
-
     top: 0;
     left: 0;
     bottom: 0;
@@ -478,6 +487,7 @@
   }
   .ms-navigation .ms-mobile-show {
     display: flex;
+    padding: 20px 15px;
   }
   .ms-navigation ul li .ms-name-nav::after {
     position: relative;

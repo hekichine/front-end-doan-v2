@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 const HomePage = () => {
   return (
     <>
+      <div class="t4s-overlay-mobile"></div>
       <Header />
       <section className="ms-app-content">
         <Outlet />

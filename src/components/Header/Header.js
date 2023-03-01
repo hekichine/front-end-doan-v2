@@ -4,7 +4,7 @@ import { MdOutlineMail } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiShoppingBag } from "react-icons/fi";
-import { RiMenu4Fill } from "react-icons/ri";
+import { RiCloseFill, RiMenu4Fill } from "react-icons/ri";
 import { MdOutlineMenuOpen } from "react-icons/md";
 
 import { BsTelephone, BsSearch } from "react-icons/bs";
@@ -35,6 +35,11 @@ const Header = () => {
   };
   const showMenu = () => {
     setToggleNav(true);
+    document.querySelector(".t4s-overlay-mobile")?.classList?.add("active");
+  };
+  const closeMenu = () => {
+    setToggleNav(false);
+    document.querySelector(".t4s-overlay-mobile")?.classList?.remove("active");
   };
   return (
     <>
@@ -125,10 +130,13 @@ const Header = () => {
                 <div className="ms-navigation">
                   <div className="ms-mobile-show">
                     <div className="ms-logo-mobile">
-                      <img src="./assets/image/logoApp/USEN.png" alt="" />
+                      <img src="./assets/logoApp/shine.png" alt="" />
                     </div>
-                    <div className="ms-close-btn-mobile ms-menu-mobie">
-                      <i className="fa-solid fa-xmark"></i>
+                    <div
+                      className="ms-close-btn-mobile ms-menu-mobie"
+                      onClick={() => closeMenu()}
+                    >
+                      <RiCloseFill color="#000" />
                     </div>
                   </div>
                   <ul>

@@ -1,20 +1,22 @@
 import React from "react";
-import Product from "../Product/Product";
+import Product from "../../Product/Product";
 
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
+import product from "../dataProduct";
+
 const SaleProduct = () => {
-  const [products, setProducts] = useState();
+  // const [products, setProducts] = useState();
   useEffect(() => {
     let fetch = async () => {
       let result = await axios.get(`http://localhost:8080/api/product/sale`);
       if (result?.data?.error === 0) {
-        setProducts(result?.data?.sale);
+        // setProducts(result?.data?.sale);
       }
     };
-    fetch();
+    // fetch();
   }, []);
   return (
     <>
@@ -23,15 +25,15 @@ const SaleProduct = () => {
           <div className="ms-section-heading" style={{ marginBottom: "30px" }}>
             SALE
           </div>
-          <div className="row gx-4 gy-3">
-            {products &&
-              products?.length > 0 &&
-              products
-                ?.slice(0, 8)
+          <div className="row gx-4 gy-4 row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+            {product &&
+              product?.length > 0 &&
+              product
+                ?.slice(0, 10)
                 ?.sort((a, b) => b.sale - a.sale)
                 ?.map((item, index) => (
                   <>
-                    <div className="col-6 col-md-4 col-lg-3">
+                    <div className="col-item">
                       <Product data={item} key={index} />
                     </div>
                   </>

@@ -65,12 +65,16 @@
 }
 
 /* header top */
-.ms-header {
+.ms-header[home="true"] {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
+}
+.ms-header[home="false"] {
+  position: relative;
+  background-color: #f6f6f6;
 }
 .ms-header .ms-header-top {
   border-bottom: 1px solid #eee;
@@ -424,13 +428,13 @@
 .ms-navigation ul li a .ms-btn-show-nav-active {
   transform: rotate(45deg);
 }
-.t4s-overlay-mobile {
+.ms-overlay-mobile {
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
 }
-.t4s-overlay-mobile.active {
+.ms-overlay-mobile.active {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 2;

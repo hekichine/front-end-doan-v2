@@ -13,11 +13,13 @@ const Footer = () => {
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 col-xl-4 text-start">
               <Link to="" className="ms-footer-logo">
-                MINHSANGSTORE
+                <img src="./assets/logoApp/shine.png" alt="" />
               </Link>
-              <p>Address : No. 96, Jecica City, NJ 07305, New York, USA</p>
-              <p>Phone : +1 222 3333 578</p>
-              <p>Email : hekichien@gmail.com</p>
+              <div className="ms-ft-content">
+                <p>Address : No. 96, Jecica City, NJ 07305, New York, USA</p>
+                <p>Phone : +1 222 3333 578</p>
+                <p>Email : hekichien@gmail.com</p>
+              </div>
             </div>
             <div className="col-12 col-md-6 col-lg-4 col-xl-4 text-start">
               <div className="ms-ft-heading">Business Hours</div>
@@ -39,8 +41,10 @@ const Footer = () => {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-12 col-md-6 col-lg-4 col-xl-4 text-start">
-                Copyright & <Link to="">MINHSANGSTORE</Link> All Rights Reserved
-                by <Link to="">HekiChien</Link>
+                <p className="power">
+                  Copyright & <Link to="">MINHSANGSTORE</Link> All Rights
+                  Reserved by <Link to="">HekiChien</Link>
+                </p>
               </div>
               <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
                 <Social />

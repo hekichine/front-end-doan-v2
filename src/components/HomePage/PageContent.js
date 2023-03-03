@@ -1,8 +1,8 @@
 import React from "react";
 import Banner from "../Banner/Banner";
-import ProductList from "../ProductList/ProductList";
-import SaleProduct from "../ProductList/SaleProduct";
-import Trending from "../ProductList/Trending";
+import BestSeller from "../ProductList/BestSeller/BestSeller";
+import SaleProduct from "../ProductList/Sale/SaleProduct";
+import Trending from "../ProductList/Trending/Trending";
 import Shipping from "../Shipping/Shipping";
 import Testimonial from "../Testimonial/Testimonial";
 import BackToTop from "react-back-to-top-button";
@@ -16,11 +16,10 @@ const PageContent = () => {
       <div className="ms-page-content">
         <Slider />
         <Category />
-        <Banner />
-        <ProductList />
-        <Testimonial />
-        <SaleProduct />
+        <BestSeller />
         <Shipping />
+        <SaleProduct />
+        <Testimonial />
         <Trending />
         <BackToTop
           showOnScrollDown

@@ -31,7 +31,7 @@ body {
   width: 100%;
 }
 .ratio-4x5 {
-  --bs-aspect-ratio: 80.75%;
+  --bs-aspect-ratio: 123.8390092879257%;
 }
 a {
   text-decoration: none !important;
@@ -63,5 +63,11 @@ ol {
 @media screen and (min-width: 1025px) {
   .w-lg-50 {
     width: calc(50% - 10px);
+  }
+}
+@media screen and (min-width: 1750px) {
+  .container {
+    max-width: 1740px;
+    width: 100%;
   }
 }

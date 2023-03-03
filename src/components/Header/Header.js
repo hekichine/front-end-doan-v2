@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { MdOutlineMail } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -11,11 +11,14 @@ import { BsTelephone, BsSearch } from "react-icons/bs";
 
 import "./Header.css";
 import { useSelector } from "react-redux";
+import CartPopup from "../HomePage/CartPopup/CartPopup";
 
 const Header = () => {
   const cart = useSelector((state) => state.cart);
   let user = JSON.parse(localStorage.getItem("user"));
   const [toggleNav, setToggleNav] = useState();
+  const home = useLocation();
+  const [visible, setVisible] = useState(false);
 
   // Sticky Menu Area
   useEffect(() => {
@@ -35,15 +38,24 @@ const Header = () => {
   };
   const showMenu = () => {
     setToggleNav(true);
-    document.querySelector(".t4s-overlay-mobile")?.classList?.add("active");
+    document.querySelector(".ms-overlay-mobile")?.classList?.add("active");
   };
   const closeMenu = () => {
     setToggleNav(false);
-    document.querySelector(".t4s-overlay-mobile")?.classList?.remove("active");
+    document.querySelector(".ms-overlay-mobile")?.classList?.remove("active");
+  };
+  //  handle action bar
+  const CartButton = (e) => {
+    e.preventDefault();
+    document.querySelector(".ms-overlay-mobile")?.classList?.add("active");
+    setVisible(true);
   };
   return (
     <>
-      <section className="ms-header">
+      <section
+        className="ms-header"
+        home={home?.pathname == "/" ? "true" : "false"}
+      >
         <div className="ms-header-top">
           <div className="ms-header-top-container container">
             <div className="ms-header-top-row row">
@@ -141,8 +153,8 @@ const Header = () => {
                   </div>
                   <ul>
                     <li>
-                      <Link to="#" className="ms-name-nav ms-pr">
-                        <span>demo</span>
+                      <Link to="/" className="ms-name-nav ms-pr">
+                        <span>Home</span>
                       </Link>
                     </li>
                     <li>
@@ -151,7 +163,7 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="#" className="ms-name-nav ms-pr">
+                      <Link to="/shop" className="ms-name-nav ms-pr">
                         <span>shop</span>
                       </Link>
                     </li>
@@ -201,7 +213,11 @@ const Header = () => {
                       </Link>
                     </div>
                     <div className="ms-nav_icon ms-icon_cart">
-                      <Link to="#" className="ms-pr">
+                      <Link
+                        to=""
+                        onClick={(e) => CartButton(e)}
+                        className="ms-pr"
+                      >
                         <FiShoppingBag size={23} />
                         <span className="ms-po ms-count-box">
                           {cart?.length || 0}
@@ -214,6 +230,7 @@ const Header = () => {
             </div>
           </div>
         </div>
+        <CartPopup setVisible={setVisible} visible={visible} />
       </section>
     </>
   );

@@ -1,24 +1,16 @@
+.ms-product-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .ms-product-item .ms-product-img {
-  height: 400px;
   overflow: hidden;
 }
-.ms-product-item .ms-product-img .ms-product-btn-group {
-  position: absolute;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.ms-product-item .ms-product-img img {
+  transition: 0.5s linear;
 }
-.ms-product-item .ms-product-img .ms-product-btn-group {
-  position: absolute;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.ms-product-item .ms-product-btn-group a {
+
+.ms-product-item .ms-product-btn-group .ms-button-cart {
   z-index: 1;
   min-width: 100px;
   border-radius: 100px;
@@ -57,6 +49,11 @@
 .ms-product-img .ms-heart {
   top: 12px;
   right: 16px;
+  left: unset;
+  width: unset;
+  height: unset;
+  box-shadow: 0px 0px 60px rgb(0 0 0 / 20%);
+  border-radius: 100%;
 }
 .ms-product-img .ms-heart a {
   width: 35px;
@@ -134,7 +131,36 @@
   color: #868686;
   text-decoration: line-through;
 }
-@media screen and (min-width: 1400px) {
+.ms-product-item .ms-product-img .ms-product-btn-group {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: unset;
+  background-color: #fff;
+  text-align: center;
+  transition: opacity 0.5s linear, top 0.5s linear;
+  width: unset;
+  height: unset;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+}
+.ms-product-item .ms-title-size {
+  display: none;
+}
+.ms-product-item .ms-product-inner {
+  border-radius: 4px;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+@media screen and (min-width: 1024px) {
+  .ms-product-item .ms-product-img .ms-product-btn-group {
+    top: 80%;
+    opacity: 0;
+    bottom: unset;
+    background-color: transparent;
+  }
   .ms-product-item .ms-product-img .ms-title-size {
     position: absolute;
     top: 92%;
@@ -159,20 +185,12 @@
     background: rgba(0, 0, 0, 0);
     transition: background 0.5s linear;
   }
-  .ms-product-item .ms-product-img .ms-product-btn-group {
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 80%;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s linear, top 0.5s linear;
-  }
-  .ms-product-item .ms-product-btn-group a {
+
+  .ms-product-item .ms-product-btn-group .ms-button-cart {
     opacity: 0;
     transition: transform 0.4s linear, opacity 0.4s linear;
   }
-  .ms-product-item .ms-product-btn-group a::before {
+  .ms-product-item .ms-product-btn-group .ms-button-cart::before {
     position: absolute;
     content: "";
     top: 0;
@@ -186,25 +204,36 @@
     border-radius: 0;
     z-index: -1;
   }
-  .ms-product-item .ms-product-btn-group a:hover::before {
+  .ms-product-item .ms-product-btn-group .ms-button-cart:hover::before {
     transform: translateY(0);
   }
-  .ms-product-item .ms-product-btn-group a:hover {
+  .ms-product-item .ms-product-btn-group .ms-button-cart:hover {
     color: #fff;
     z-index: 2;
   }
   .ms-product-item .ms-product-btn-group .ms-addcart {
     transform: translateX(-100%);
   }
+  .ms-product-item .ms-product-btn-group .ms-quickview {
+    transform: translateX(100%);
+  }
 }
 @media screen and (max-width: 1365px) {
-  .ms-product-item .ms-product-btn-group a {
+  .ms-product-item .ms-product-btn-group .ms-button-cart {
     min-width: 90px;
     padding: 10px 5px;
   }
 }
+@media screen and (max-width: 1023px) {
+  .ms-product-item .ms-product-btn-group .ms-button-cart {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0;
+    margin-top: 10px;
+    min-width: unset !important;
+  }
+}
 @media screen and (max-width: 525px) {
-  .ms-product-item .ms-product-btn-group a {
+  .ms-product-item .ms-product-btn-group .ms-button-cart {
     min-width: 90px;
     padding: 5px 10px;
   }
@@ -219,5 +248,20 @@
   }
   .ms-product-price .ms-product-cost-new {
     font-size: 12px;
+  }
+}
+@media (-moz-touch-enabled: 0), (hover: hover) and (min-width: 1025px) {
+  .ms-product-inner:hover .ms-product-image-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .ms-product-inner:hover .ms-product-btn-group {
+    opacity: 1;
+  }
+  .ms-product-inner:hover .ms-product-btn-group .ms-button-cart {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .ms-product-inner:hover .ms-product-img img {
+    transform: scale(1.1);
   }
 }

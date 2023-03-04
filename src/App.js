@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 
 import ShopPage from "./components/ShopPages/ShopPage";
 import Login from "./components/Login/Login";
-import Cart from "./components/Cart/Cart";
 import HomePage from "./components/HomePage/HomePage";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Admin from "./components/Dashboard/Admin";
@@ -29,7 +28,6 @@ function App() {
         <Route path="/" element={<HomePage />}>
           <Route path="" element={<PageContent />} />
           <Route path="account/:uid" element={<Account />} />
-          <Route path="cart" element={<Cart />} />
           <Route path="shop" element={<ShopPage />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="product/:id" element={<ProductDetail />} />

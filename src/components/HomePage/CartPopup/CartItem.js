@@ -4,33 +4,27 @@ import CurrencyFormat from "react-currency-format";
 import { GrFormClose } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { increment, decrement, removeToCart } from "../../../redux/cartSlice";
 
 import "./CartItem.css";
 
 const CartItem = (props) => {
   const product = props?.product;
-  const [count, setCount] = useState(product?.count);
   const dispatch = useDispatch();
-
-  const CountChange = (e) => {
-    if (e.target.value >= product?.quantity) {
-      setCount(product?.quantity);
-      return;
-    }
-    setCount(e.target.value);
-  };
   const inCre = () => {
-    if (count >= product?.quantity) {
-      setCount(product?.quantity);
+    if (product?.count == product?.quantity) {
       return;
     }
-    setCount((pre) => pre + 1);
+    dispatch(increment(product));
   };
   const deCre = () => {
-    if (count == 1) {
+    if (product?.count == 1) {
       return;
     }
-    setCount((pre) => pre - 1);
+    dispatch(decrement(product));
+  };
+  const removeCart = () => {
+    dispatch(removeToCart(product));
   };
 
   return (
@@ -66,13 +60,14 @@ const CartItem = (props) => {
               <button onClick={() => deCre()}>-</button>
               <input
                 type="text"
-                value={count}
-                onChange={(e) => CountChange()}
+                value={product?.count}
+                disabled={true}
+                className="pe-none"
               />
               <button onClick={() => inCre()}>+</button>
             </div>
           </div>
-          <button className="btn-del-cart-item">
+          <button className="btn-del-cart-item" onClick={() => removeCart()}>
             <GrFormClose />
           </button>
         </div>

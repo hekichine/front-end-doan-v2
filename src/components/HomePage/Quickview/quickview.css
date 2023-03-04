@@ -1,0 +1,24 @@
+.ms-quickview-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999999;
+
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.ms-quickview-popup.active {
+  display: flex;
+}
+.ms-quickview-popup .ms-qickview-container {
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.ms-quickview-popup .qv-heading {
+  flex: 1 1 auto;
+}

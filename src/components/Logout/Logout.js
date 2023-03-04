@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch } from "react-redux";
-import { removeCart } from "../../redux/cartSlice";
+import { clearCart } from "../../redux/cartSlice";
 
 const Logout = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     localStorage.removeItem("user");
-    dispatch(removeCart());
+    dispatch(clearCart());
     let signout = setTimeout(() => {
       toast('🦄 Sign out success! It"s so easy', {
         position: "top-right",

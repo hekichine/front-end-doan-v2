@@ -31,7 +31,8 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   height: 82px;
 }
-.ms-cart-popup .ms-cart-content {
+.ms-cart-popup .ms-cart-content,
+.ms-cart-popup .ms-cart-null {
   flex: 1 1 auto;
 }
 .ms-cart-popup .ms-cart-bottom {
@@ -43,10 +44,12 @@
 }
 .ms-cart-bottom .ms-total-title {
   font-weight: 600;
+  font-size: 20px;
 }
 .ms-cart-bottom .ms-total-price {
   font-weight: 600;
   color: #fa0000;
+  font-size: 20px;
 }
 .ms-cart-bottom .ms-mini-cart-group-btns {
   display: flex;
@@ -55,22 +58,32 @@
   align-items: center;
 }
 .ms-cart-bottom .ms-mini-cart-btn {
-  min-width: 120px;
-  padding: 10px 20px;
+  min-width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid;
   transition: 0.35s ease;
+  line-height: 48px;
+  border-radius: 50px;
 }
 .ms-cart-bottom .ms-close-cart:hover {
-  background-color: #000;
+  background-color: #0ec1ae;
   color: #fff;
 }
 .ms-cart-bottom .ms-checkout-btn {
   background-color: #000;
   color: #fff;
+  border-color: #000;
 }
 .ms-cart-bottom .ms-checkout-btn:hover {
   color: #fb417f;
   background-color: #fff;
+  border-color: #fb417f;
+}
+.ms-cart-bottom .label-tax {
+  font-size: 16px;
+  font-weight: 500;
 }
 @media screen and (max-width: 767px) {
   .ms-cart-popup {

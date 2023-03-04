@@ -4,6 +4,7 @@ import userSlice from "./userSlice";
 import productSlice from "./productSlice";
 import cartSlice from "./cartSlice";
 import collectionSlice from "./collectionSlice";
+import quickviewSlice from "./quickviewSlice";
 //
 export const store = configureStore({
   reducer: {
@@ -11,5 +12,6 @@ export const store = configureStore({
     product: productSlice,
     cart: cartSlice,
     collection: collectionSlice,
+    quickview: quickviewSlice,
   },
 });

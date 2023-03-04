@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import "./productdetail.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../../redux/cartSlice";
+import { addToCart } from "../../redux/cartSlice";
 import { toast } from "react-toastify";
 import Comment from "../Comment/Comment";
 import CurrencyFormat from "react-currency-format";
@@ -74,7 +74,7 @@ const ProductDetail = () => {
       ...product,
       count: count,
     };
-    dispatch(addCart(action));
+    dispatch(addToCart(action));
     toast.success("Add to cart success!", {
       position: "top-right",
       autoClose: 1500,

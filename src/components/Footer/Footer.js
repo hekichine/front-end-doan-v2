@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="container ms-ft-top">
           <div className="row">
             <div className="col-12 col-md-6 col-lg-4 col-xl-4 text-start">
-              <Link to="" className="ms-footer-logo">
+              <Link to="/" className="ms-footer-logo">
                 <img src="./assets/logoApp/shine.png" alt="" />
               </Link>
               <div className="ms-ft-content">

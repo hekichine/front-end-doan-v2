@@ -127,7 +127,7 @@ const Header = () => {
               </div>
               <div className="col-md-4 col-xl-2 col-6 text-xl-start text-center">
                 <div className="ms-header-logo">
-                  <Link to="#">
+                  <Link to="/">
                     <img src="./assets/logoApp/shine.png" alt="" />
                   </Link>
                 </div>

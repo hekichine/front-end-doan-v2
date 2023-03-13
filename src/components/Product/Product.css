@@ -154,6 +154,25 @@
   overflow: hidden;
   padding-bottom: 10px;
 }
+.ms-product-item .ms-instock {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+}
+.ms-product-item[instock="false"] .ms-instock {
+  opacity: 1;
+}
+.ms-product-item[instock="false"] .ms-addcart {
+  display: none;
+}
 @media screen and (min-width: 1024px) {
   .ms-product-item .ms-product-img .ms-product-btn-group {
     top: 80%;

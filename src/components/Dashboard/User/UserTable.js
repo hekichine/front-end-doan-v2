@@ -7,19 +7,19 @@ import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import "./userTable.css";
 
 const UserTable = (props) => {
-  let dataUser = props.dataUser;
-  let search = props.search;
-  let setReUser = props.setReUser;
+  let users = props?.users;
+  let search = props?.search;
+  let setLoad = props?.setLoad;
 
   const handleDelete = async (item) => {
     let data = await axios.delete(
-      `http://localhost:8080/api/user/delete/${item.id}`
+      `http://localhost:8080/api/v1/users/${item.id}`
     );
 
-    if (data.data.error === 0) {
-      toast.success(`${data.data.message}`, {
+    if (data.data?.success === true) {
+      toast.success(`${data.data?.message}`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -27,13 +27,12 @@ const UserTable = (props) => {
         progress: undefined,
         theme: "light",
       });
-      let newUSer = dataUser.filter((user) => user.id !== item.id);
-      setReUser(newUSer);
+      setLoad((pre) => pre + 1);
       return;
     }
-    toast.error(`${data.data.message}`, {
+    toast.error(`${data.data?.message}`, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -60,17 +59,21 @@ const UserTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {dataUser &&
-            dataUser.length > 0 &&
-            dataUser
+          {users &&
+            users.length > 0 &&
+            users
               .filter((user) => {
                 if (search === "") {
                   return user;
                 } else if (
-                  user.fullname.toLowerCase().includes(search.toLowerCase()) ||
-                  user.username.toLowerCase().includes(search.toLowerCase()) ||
-                  user.email.toLowerCase().includes(search.toLowerCase()) ||
-                  user.phone.toLowerCase().includes(search.toLowerCase())
+                  user.fullname
+                    ?.toLowerCase()
+                    .includes(search?.toLowerCase()) ||
+                  user.username
+                    ?.toLowerCase()
+                    .includes(search?.toLowerCase()) ||
+                  user.email?.toLowerCase().includes(search?.toLowerCase()) ||
+                  user.phone?.toLowerCase().includes(search?.toLowerCase())
                 ) {
                   return user;
                 }
@@ -82,7 +85,7 @@ const UserTable = (props) => {
                     <td>
                       {" "}
                       <img
-                        src={`http://localhost:8080/${item.user_image}`}
+                        src={item?.avatar}
                         style={{
                           width: "40px",
                           height: "40px",
@@ -90,40 +93,18 @@ const UserTable = (props) => {
                         }}
                       />
                     </td>
-                    <td>{item.fullname} </td>
+                    <td>{item.fullname || "Chưa cập nhật"} </td>
                     <td>{item.username}</td>
                     <td>{item.phone}</td>
                     <td>{item.email}</td>
-                    <td>{item.role === 1 ? "Admin" : "Member"}</td>
+                    <td>{item.isAdmin === true ? "Admin" : "Member"}</td>
                     <td>
-                      {item.role === 1 ? (
-                        <>
-                          <Link
-                            to={`/dashboard/account/${item.id}`}
-                            className="edit"
-                            title=""
-                            data-toggle="tooltip"
-                            data-original-title="Edit"
-                          >
-                            <AiOutlineEdit />
-                          </Link>
-                        </>
+                      {item.isAdmin === true ? (
+                        <></>
                       ) : (
                         <>
-                          <Link
-                            to={`/dashboard/account/${item.id}`}
-                            className="edit"
-                            title=""
-                            data-toggle="tooltip"
-                            data-original-title="Edit"
-                          >
-                            <AiOutlineEdit />
-                          </Link>
                           <button
                             className="delete"
-                            title=""
-                            data-toggle="tooltip"
-                            data-original-title="Delete"
                             onClick={() => handleDelete(item)}
                           >
                             <AiOutlineDelete />

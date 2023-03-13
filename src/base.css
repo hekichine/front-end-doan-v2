@@ -33,6 +33,9 @@ body {
 .ratio-4x5 {
   --bs-aspect-ratio: 123.8390092879257%;
 }
+.pt-127 {
+  padding-top: 127px;
+}
 a {
   text-decoration: none !important;
   color: #000;
@@ -69,5 +72,10 @@ ol {
   .container {
     max-width: 1740px;
     width: 100%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .pt-127 {
+    padding-top: 65px;
   }
 }

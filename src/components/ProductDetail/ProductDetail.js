@@ -92,7 +92,7 @@ const ProductDetail = () => {
   }, [id]);
   return (
     <>
-      <section className="ms-pr-detail">
+      <section className="ms-pr-detail pt-127">
         <div className="container mt-5 mb-5 ">
           <div className="row d-flex justify-content-center">
             <div className="col-md-10">

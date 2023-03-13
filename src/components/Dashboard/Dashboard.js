@@ -16,7 +16,7 @@ const Dashboard = () => {
     setToggleNav(!toggleNav);
   };
   useEffect(() => {
-    if (!user || user?.role !== 1) {
+    if (!user || user?.isAdmin !== true) {
       toast('🦄 You aren"t admin!', {
         position: "top-right",
         autoClose: 3000,
@@ -43,7 +43,12 @@ const Dashboard = () => {
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
           {/* <!-- Navbar Brand--> */}
           <Link className="navbar-brand ps-3" to="">
-            MINH SANG STORE
+            <img
+              src="../assets/logoApp/shine_white.png"
+              alt=""
+              width={80}
+              height={40}
+            />
           </Link>
           {/* <!-- Sidebar Toggle--> */}
           <button
@@ -74,10 +79,7 @@ const Dashboard = () => {
                 <div className="nav">
                   <div className="sb-sidenav-menu-heading">
                     <div className="ms-menu-avt">
-                      <img
-                        src={`http://localhost:8080/${user?.user_image}`}
-                        alt=""
-                      />
+                      <img src={user?.avatar} alt="" />
                     </div>
                     <div className="ms-user-info">
                       <p>{user?.fullname}</p>

@@ -439,6 +439,25 @@
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
+.ms-header .ms-account-control {
+  position: absolute;
+  top: 100%;
+  min-width: 120px;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  transform: translateX(-30%);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  background-color: #fff;
+}
+.ms-header .ms-account:hover .ms-account-control {
+  opacity: 1;
+  pointer-events: auto;
+}
+.ms-header .ms-account-control a {
+  padding: 10px;
+}
 @media screen and (max-width: 1365px) {
   .ms-header .ms-menu-mobile {
     position: fixed;
@@ -542,25 +561,26 @@
   }
 }
 @media screen and (max-width: 1023px) {
-  .ms-header-bottom .ms-mobile-slide-icon {
-    display: none;
-    background-color: #fff;
-    position: absolute;
-    top: 100%;
-    width: 30%;
-
+  .ms-site-nav-icons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     right: 0;
-    padding: 10px 20px;
-    border-radius: 5px;
-  }
-  .ms-header-bottom .ms-site-nav-icons {
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
+    background-color: #fff;
+    justify-content: space-around;
+    max-height: 65px;
   }
+  .ms-site-nav-icons .ms-nav_icon {
+    width: 25%;
+    padding: 15px 10px;
+  }
+  .ms-site-nav-icons .ms-nav_icon:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
   .ms-header-bottom .ms-site-nav-icons svg {
     width: 25px;
     height: 25px;
@@ -568,9 +588,6 @@
   }
   .ms-header-bottom .ms-shopping-mobile {
     position: relative;
-  }
-  .ms-nav_icon .ms-count-box {
-    right: 0;
   }
 }
 @media screen and (max-width: 767px) {
@@ -583,9 +600,6 @@
   }
   .ms-header .ms-item-right {
     display: none;
-  }
-  .ms-header-bottom .ms-mobile-slide-icon {
-    width: 30%;
   }
 
   .ms-page-nav-item .ms-page-img {
@@ -612,6 +626,9 @@
 
   .ms-page-nav-item-features p {
     font-size: 14px;
+  }
+  .ms-site-nav-icons .ms-nav_icon {
+    padding: 10px;
   }
 }
 @media screen and (max-width: 430px) {

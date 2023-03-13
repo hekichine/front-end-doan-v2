@@ -8,6 +8,7 @@ import CurrencyFormat from "react-currency-format";
 import { addToCart } from "../../redux/cartSlice";
 import { AiOutlineHeart } from "react-icons/ai";
 import { addQuickview } from "../../redux/quickviewSlice";
+import { ImSad } from "react-icons/im";
 
 const Product = (props) => {
   const dispatch = useDispatch();
@@ -27,12 +28,18 @@ const Product = (props) => {
 
   return (
     <>
-      <div className="ms-product-item">
+      <div
+        className="ms-product-item"
+        instock={product?.quantity === 0 ? "true" : "false"}
+      >
         <div className="ms-product-inner ms-pr ms-oh">
           <div className="ms-product-img ms-pr ratio ratio-4x5">
             <Link to="#">
               <img src={product?.image_url} alt="" />
             </Link>
+            <div className="ms-instock ms-pa">
+              <ImSad size={30} />
+            </div>
             <div className="ms-product-image-overlay ms-pe-none"></div>
             <div className="ms-product-btn-group ms-pe-none">
               <button

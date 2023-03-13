@@ -4,6 +4,10 @@
   overflow: hidden;
   min-width: 100px;
 }
+.ms-cart-item[instock="false"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .ms-cart-item .ms-cart-item-img img {
   width: 100%;
   height: 100%;

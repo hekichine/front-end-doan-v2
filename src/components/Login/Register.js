@@ -30,14 +30,12 @@ const Login = () => {
         email: email,
         password: password,
       };
-      let data = await axios.post(
-        "http://localhost:8080/api/user/signup",
-        user
-      );
-      if (data.data.error === 0) {
+      console.log(user);
+      let data = await axios.post("http://localhost:8080/api/v1/users", user);
+      if (data.data.success === true) {
         toast(`🦄 Wow so easy! ${data.data.message}`, {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -50,6 +48,17 @@ const Login = () => {
           navigation("/signin");
           console.log(1);
         }, 2000);
+      } else {
+        toast.error(`${data.data.message}`, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
     }
   };

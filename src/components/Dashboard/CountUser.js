@@ -13,46 +13,35 @@ const CountUser = () => {
   const [dataCount, setDataCount] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
   const [productCount, setProductCount] = useState(0);
-  const [collection, setCollection] = useState(0);
+  const [categories, setCategories] = useState(0);
   const [comments, setComment] = useState(0);
   useEffect(() => {
     let fetchUser = async () => {
-      let result = await axios.get(
-        "http://localhost:8080/api/user/getall?page=1&limit=3"
-      );
-
-      if (result.data.error === 0) {
-        setDataCount(result.data?.dataCount);
+      let result = await axios.get("http://localhost:8080/api/v1/users");
+      if (result.data?.success === true) {
+        setDataCount(result.data?.users?.length);
       }
     };
 
     let fetchProduct = async () => {
-      let result = await axios.get(
-        "http://localhost:8080/api/product/getall?page=1&limit=3"
-      );
-
-      if (result.data.error === 0) {
-        setProductCount(result.data?.dataCount);
+      let result = await axios.get("http://localhost:8080/api/v1/products");
+      if (result.data?.success === true) {
+        setProductCount(result.data?.products?.length);
       }
     };
     let fetchComment = async () => {
-      let result = await axios.get(
-        `http://localhost:8080/api/product/comment?page=1&limit=3`
-      );
-
-      if (result.data.error === 0) {
-        setComment(result.data?.dataCount);
+      let result = await axios.get(`http://localhost:8080/api/v1/products`);
+      if (result.data?.success === true) {
+        setComment(result.data?.products?.length);
       }
     };
-    let fetchCollection = async () => {
-      let result = await axios.get(
-        "http://localhost:8080/api/collection/getall"
-      );
-      if (result?.data?.error === 0) {
-        setCollection(result?.data?.count);
+    let fetchCategory = async () => {
+      let result = await axios.get("http://localhost:8080/api/v1/categories");
+      if (result?.data?.success === true) {
+        setCategories(result?.data?.categories?.length);
       }
     };
-    // fetchCollection();
+    fetchCategory();
     fetchProduct();
     fetchUser();
     fetchComment();
@@ -98,8 +87,8 @@ const CountUser = () => {
             <AiOutlineProfile />
           </div>
           <div className="total-user-count">
-            <p>{collection}</p>
-            <p>Collections</p>
+            <p>{categories}</p>
+            <p>Categories</p>
           </div>
         </div>
       </div>

@@ -1,57 +1,56 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
-import { Link } from "react-router-dom";
-import { addProduct } from "../../../../redux/productSlice";
-
 import "../../User/userTable.css";
-import { useDispatch } from "react-redux";
 import CurrencyFormat from "react-currency-format";
 
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { RiImageEditLine } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../../../redux/productSlice";
 
 const ProductTable = (props) => {
   const dispatch = useDispatch();
-  let dataProduct = props.dataProduct;
+  let products = props?.products;
   let search = props.search;
-  let setReProduct = props.setReProduct;
+  let setLoad = props?.setLoad;
+  let handleEdit = props?.handleEdit;
 
-  const handleEdit = (item) => {
+  const handlePopup = (item) => {
     dispatch(addProduct(item));
   };
-  // const handleDelete = async (item) => {
-  //   let data = await axios.delete(
-  //     `http://localhost:8080/api/product/delete/${item.id}`
-  //   );
+  const handleDelete = async (item) => {
+    let data = await axios.delete(
+      `http://localhost:8080/api/v1/products/${item.id}`
+    );
 
-  //   if (data.data.error === 0) {
-  //     toast.success(`${data.data.message}`, {
-  //       position: "top-right",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //     let newUSer = dataProduct.filter((product) => product.id !== item.id);
-  //     setReProduct(newUSer);
-  //     return;
-  //   }
-  //   toast.error(`${data.data.message}`, {
-  //     position: "top-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //   });
-  //   return;
-  // };
+    if (data.data?.success === true) {
+      toast.success(`${data.data?.message}`, {
+        position: "top-right",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setLoad((pre) => pre + 1);
+      return;
+    }
+    toast.error(`${data.data?.message}`, {
+      position: "top-right",
+      autoClose: 500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    return;
+  };
   return (
     <>
       <table className="product-table table table-striped table-hover table-bordered">
@@ -61,29 +60,24 @@ const ProductTable = (props) => {
             <th>Product name</th>
             <th>Price</th>
             <th>Description</th>
+            <th>Category</th>
             <th>Product image</th>
-            <th>Quantity</th>
+            <th>InStock</th>
             <th>Sale</th>
-            <th>Language</th>
             <th>Publisher</th>
             <th>Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {dataProduct &&
-            dataProduct.length > 0 &&
-            dataProduct
+          {products &&
+            products?.length > 0 &&
+            products
               .filter((product) => {
                 if (search === "") {
                   return product;
                 } else if (
-                  product.product_name
-                    .toLowerCase()
-                    .includes(search.toLowerCase()) ||
-                  product.language
-                    .toLowerCase()
-                    .includes(search.toLowerCase()) ||
+                  product.name.toLowerCase().includes(search.toLowerCase()) ||
                   product.publisher
                     .toLowerCase()
                     .includes(search.toLowerCase()) ||
@@ -97,65 +91,71 @@ const ProductTable = (props) => {
               })
               .map((item, index) => (
                 <>
-                  <tr key={item.id}>
+                  <tr key={item?.id}>
                     <td>{index + 1}</td>
-                    <td>{item.product_name}</td>
+                    <td>{item?.name}</td>
                     <td>
                       <CurrencyFormat
-                        value={item.price}
+                        value={item?.price}
                         displayType={"text"}
                         thousandSeparator={true}
-                        prefix={""}
+                        suffix={"$"}
+                        decimalScale={2}
                         className={"me-1"}
                       />
-                      đ
                     </td>
-                    <td className="product-description">
-                      <div className="ms-des" style={{ maxWidth: "700px" }}>
-                        {item.description}
-                      </div>
+                    <td
+                      className="product-description"
+                      style={{ maxWidth: "550px" }}
+                    >
+                      <div className="ms-des">{item?.description}</div>
                     </td>
+                    <td>{item?.category?.name}</td>
                     <td>
                       <img
-                        src={`http://localhost:8080/${item.product_image}`}
+                        src={item?.image}
                         style={{
                           width: "60px",
                           height: "100px",
+                          objectFit: "cover",
                         }}
                       />
                     </td>
                     <td>
                       <CurrencyFormat
-                        value={item.quantity}
+                        value={item?.countInStock}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={""}
                         className={"me-1"}
                       />
                     </td>
-                    <td>{item.sale} %</td>
-                    <td>{item.language}</td>
-                    <td>{item.publisher}</td>
-                    <td>{item.status === 1 ? <>Enable</> : <>Disable</>}</td>
+                    <td>{item?.sale} %</td>
+                    <td>{item?.publisher}</td>
+                    <td>
+                      {item?.isFeatured === true ? <>Enable</> : <>Disable</>}
+                    </td>
                     <td>
                       <div className="ms-action" style={{ minWidth: "50px" }}>
-                        <Link
-                          to={"/dashboard/product/detail"}
+                        <button
                           className="edit"
-                          title=""
-                          data-toggle="tooltip"
-                          data-original-title="Edit"
                           onClick={() => handleEdit(item)}
                         >
                           <AiOutlineEdit />
-                        </Link>
+                        </button>
                         <button
-                          // disabled
+                          className="edit"
+                          onClick={() => handlePopup(item)}
+                        >
+                          <RiImageEditLine />
+                        </button>
+
+                        <button
                           className="delete"
                           title=""
                           data-toggle="tooltip"
                           data-original-title="Delete"
-                          // onClick={() => handleDelete(item)}
+                          onClick={() => handleDelete(item)}
                         >
                           <AiOutlineDelete />
                         </button>
@@ -166,6 +166,15 @@ const ProductTable = (props) => {
               ))}
         </tbody>
       </table>
+      {products?.length === 0 ? (
+        <>
+          <div className="d-flex justify-content-center color-red">
+            Data Null or Error
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

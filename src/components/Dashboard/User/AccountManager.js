@@ -7,43 +7,27 @@ import ReactPaginate from "react-paginate";
 import "./accountuser.css";
 
 const AccountManager = () => {
-  const [user, setUser] = useState();
+  const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(15);
-
-  const handlePageClick = (dt) => {
-    let numpage = dt.selected + 1;
-    setCurrentPage(numpage);
-  };
-  const handleView = () => {
-    let random = Math.floor(Math.random() * 1000);
-    setLimit(random);
-  };
+  const [load, setLoad] = useState();
 
   useEffect(() => {
     setLoading(true);
-    let callDataUser = async (currentPage, limit) => {
-      let data = await axios.get(
-        `http://localhost:8080/api/user/getall?page=${currentPage}&limit=${limit}`
-      );
-      console.log(data.data);
-      if (data && data.data.error !== "0") {
-        setUser(data.data.rows);
-        setPage(data.data.pageCount);
-        console.log(data.data.rows);
+    let callDataUser = async () => {
+      let data = await axios.get(`http://localhost:8080/api/v1/users`);
+      if (data && data.data.success === true) {
+        setUsers(data.data?.users);
         setTimeout(() => {
           setLoading(false);
         }, 500);
       }
     };
-    callDataUser(currentPage, limit);
+    callDataUser();
     return () => {
       clearTimeout();
     };
-  }, [currentPage, limit]);
+  }, [load]);
   return (
     <>
       <div className="container-fluid">
@@ -68,35 +52,8 @@ const AccountManager = () => {
               {loading ? (
                 <BeatLoader color="#36d7b7" />
               ) : (
-                <UserTable
-                  setReUser={setUser}
-                  dataUser={user}
-                  search={search}
-                />
+                <UserTable users={users} search={search} setLoad={setLoad} />
               )}
-              <nav className="mx-3 my-2 d-flex justify-content-between flex-wrap">
-                <ReactPaginate
-                  previousLabel={"Previous"}
-                  nextLabel={"Next"}
-                  breakLabel={"..."}
-                  pageCount={page}
-                  marginPagesDisplayed={2}
-                  pageRangeDisplayed={1}
-                  onPageChange={handlePageClick}
-                  containerClassName={"pagination"}
-                  pageClassName={"page-item"}
-                  pageLinkClassName={"page-link"}
-                  previousClassName={"page-item"}
-                  previousLinkClassName={"page-link"}
-                  nextClassName={"page-item"}
-                  nextLinkClassName={"page-link"}
-                  breakClassName={"page-item"}
-                  breakLinkClassName={"page-link"}
-                />
-                <div className="ms-view-all">
-                  <button onClick={() => handleView()}> View all</button>
-                </div>
-              </nav>
             </div>
           </div>
         </div>

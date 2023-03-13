@@ -23,12 +23,12 @@ const Login = () => {
         password: password,
       };
       let data = await axios.post(
-        "http://localhost:8080/api/user/signin",
+        "http://localhost:8080/api/v1/users/signin",
         user
       );
-      // console.log(data.data);
-      if (data.data.error === 1) {
-        toast.error(`${data.data.message}`, {
+
+      if (data.data?.success === false) {
+        toast.error(`${data.data?.message}`, {
           position: "top-right",
           autoClose: 1000,
           hideProgressBar: false,
@@ -40,7 +40,7 @@ const Login = () => {
         });
         return;
       }
-      toast.success(`${data.data.message}`, {
+      toast.success(`${data.data?.message}`, {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
@@ -50,10 +50,10 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      localStorage.setItem("user", JSON.stringify(data.data.rows[0]));
-      dispatch(addUser(data.data.rows[0]));
+      localStorage.setItem("user", JSON.stringify(data?.data?.user));
+      dispatch(addUser(data?.data?.user));
       setTimeout(() => {
-        if (data.data.rows[0].role === 1) {
+        if (data.data.user?.isAdmin === true) {
           navigation("/dashboard");
         } else {
           navigation("/");

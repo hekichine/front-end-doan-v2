@@ -52,10 +52,7 @@ const Header = () => {
   };
   return (
     <>
-      <section
-        className="ms-header"
-        home={home?.pathname == "/" ? "true" : "false"}
-      >
+      <section className="ms-header" home="true">
         <div className="ms-header-top">
           <div className="ms-header-top-container container">
             <div className="ms-header-top-row row">
@@ -191,9 +188,6 @@ const Header = () => {
                 </div>
               </div>
               <div className="col-md-4 col-3 col-item col-xl-2">
-                <div className="d-block d-lg-none ms-shopping-mobile">
-                  <MdOutlineMenuOpen />
-                </div>
                 <div className="ms-mobile-slide-icon">
                   <div className="ms-site-nav-icons">
                     <div className="ms-nav_icon ms-icon_search">
@@ -201,10 +195,30 @@ const Header = () => {
                         <BsSearch size={20} />
                       </Link>
                     </div>
-                    <div className="ms-nav_icon ms-icon_account">
-                      <Link to="/signin" className="ms-pr">
+                    <div className="ms-nav_icon ms-icon_account ms-pr ms-account">
+                      <span className="">
                         <BiUser size={25} />
-                      </Link>
+                      </span>
+                      {user ? (
+                        <>
+                          <div className="ms-account-control">
+                            <Link to="/account">Account</Link>
+                            {user?.isAdmin == true ? (
+                              <Link to={"/dashboard"}>Dashboard</Link>
+                            ) : (
+                              <></>
+                            )}
+                            <Link to={"/signout"}>Sign out</Link>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="ms-account-control">
+                            <Link to="/signin">Sign in</Link>
+                            <Link to={"/signup"}>Sign up</Link>
+                          </div>
+                        </>
+                      )}
                     </div>
                     <div className="ms-nav_icon ms-icon_heart">
                       <Link to="#" className="ms-pr">

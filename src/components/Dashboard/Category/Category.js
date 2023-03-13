@@ -11,18 +11,19 @@ const Category = () => {
   const [edit, setEdit] = useState(false);
   const [categoryname, setCategoryname] = useState();
   const [cateid, setCateid] = useState();
+  const [image, setImage] = useState();
   const [load, setLoad] = useState(0);
 
   const handleEdit = (cate) => {
     setEdit(true);
-    setCategoryname(cate?.category_name);
+    setCategoryname(cate?.name);
     setCateid(cate?.id);
   };
   const handleDelete = async (cate) => {
     let result = await axios.delete(
-      `http://localhost:8080/api/categories/delete/${cate?.id}`
+      `http://localhost:8080/api/v1/categories/${cate?.id}`
     );
-    if (result?.data?.error === 0) {
+    if (result?.data?.success === true) {
       toast.success(`${result?.data?.message}`, {
         position: "top-right",
         autoClose: 1000,
@@ -61,17 +62,14 @@ const Category = () => {
       });
       return;
     }
-    let category = {
-      id: cateid,
-      category_name: categoryname,
-    };
-    // console.log(category);
-    // return;
-    let result = await axios.post(
-      "http://localhost:8080/api/categories/update",
+    let category = new FormData();
+    category.append("name", categoryname);
+    category.append("image", image);
+    let result = await axios.put(
+      `http://localhost:8080/api/v1/categories/${cateid}`,
       category
     );
-    if (result?.data?.error === 0) {
+    if (result?.data?.success === true) {
       toast.success(`${result?.data?.message}`, {
         position: "top-right",
         autoClose: 1000,
@@ -83,6 +81,7 @@ const Category = () => {
         theme: "light",
       });
       setLoad((pre) => pre + 1);
+      setEdit(false);
       return;
     }
     toast.error(`${result?.data?.message}`, {
@@ -110,14 +109,15 @@ const Category = () => {
       });
       return;
     }
-    let category = {
-      category_name: categoryname,
-    };
+    let category = new FormData();
+    category.append("name", categoryname);
+    category.append("image", image);
+
     let result = await axios.post(
-      "http://localhost:8080/api/categories/add",
+      "http://localhost:8080/api/v1/categories",
       category
     );
-    if (result?.data?.error === 0) {
+    if (result?.data?.success === true) {
       toast.success(`${result?.data?.message}`, {
         position: "top-right",
         autoClose: 1000,
@@ -144,12 +144,10 @@ const Category = () => {
   };
   useEffect(() => {
     let fetchData = async () => {
-      let result = await axios.get(
-        "http://localhost:8080/api/categories/getall"
-      );
+      let result = await axios.get("http://localhost:8080/api/v1/categories");
       // console.log(result?.data);
-      if (result?.data?.error === 0) {
-        setCates(result?.data?.rows);
+      if (result?.data?.success === true) {
+        setCates(result?.data?.categories);
       }
     };
     fetchData();
@@ -170,6 +168,15 @@ const Category = () => {
                 className="form-control my-2"
                 value={categoryname}
                 onChange={(e) => setCategoryname(e.target.value)}
+              />
+            </div>
+            <div className="form-check my-3 text-start col-12 col-md-6 ">
+              <label htmlFor="category_image">Category image</label>
+              <input
+                type="file"
+                id="category_image"
+                className="form-control my-2"
+                onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
             <div className=" col-12 text-start ms-3">
@@ -204,6 +211,7 @@ const Category = () => {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Category name</th>
+                  <th scope="col">Category image</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -215,7 +223,10 @@ const Category = () => {
                       <th scope="row" key={cate?.id}>
                         {index + 1}
                       </th>
-                      <td>{cate?.category_name}</td>
+                      <td>{cate?.name}</td>
+                      <td>
+                        <img src={cate?.image} width={50} height={50} alt="" />
+                      </td>
                       <td>
                         <div className="ms-action" style={{ minWidth: "50px" }}>
                           <Link

@@ -2,3 +2,6 @@
   outline: none;
   border: none;
 }
+.ms-category table tr {
+  vertical-align: middle;
+}
